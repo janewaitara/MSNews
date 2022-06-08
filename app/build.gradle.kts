@@ -1,7 +1,7 @@
 plugins {
-    id (BuildPlugins.androidApplication)
-    id (BuildPlugins.kotlinAndroid)
-    id (BuildPlugins.ktlintPlugin)
+    id(BuildPlugins.androidApplication)
+    id(BuildPlugins.kotlinAndroid)
+    id(BuildPlugins.ktlintPlugin)
 }
 
 android {
@@ -42,10 +42,10 @@ dependencies {
     implementation(Libraries.materialComponents)
     implementation(Libraries.constraintLayout)
 
-    //Tests
+    // Tests
     testImplementation(TestLibraries.junit4)
 
-    //Android tests
+    // Android tests
     androidTestImplementation(TestLibraries.junit)
     androidTestImplementation(TestLibraries.testRunner)
     androidTestImplementation(TestLibraries.espresso)
