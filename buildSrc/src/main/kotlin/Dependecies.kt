@@ -12,7 +12,7 @@ object Versions {
 
     //Version codes for all the test libraries
     const val junit4 = "4.13.2"
-    const val junit = "4.13.2"
+    const val junit = "1.1.3"
     const val testRunner = "1.4.1-alpha03"
     const val espresso = "3.5.0-alpha03"
 
