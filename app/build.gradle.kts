@@ -42,11 +42,35 @@ dependencies {
     implementation(Libraries.materialComponents)
     implementation(Libraries.constraintLayout)
 
-    // Tests
+    // DI - KOIN
+    implementation(Libraries.koin)
+    implementation(Libraries.koinViewModel)
+
+    // Networking
+    implementation(Libraries.retrofit)
+    implementation(Libraries.moshi)
+    implementation(Libraries.moshiConverter)
+    implementation(Libraries.okhttp)
+    implementation(Libraries.loggingInterceptor)
+
+    // Lifecycle
+    implementation(Libraries.viewModel)
+    implementation(Libraries.livedata)
+    implementation(Libraries.lifecycle)
+
+    // Coroutines
+    implementation(Libraries.coroutines)
+    implementation(Libraries.coroutinesAndroid)
+
+    // Unit Tests
     testImplementation(TestLibraries.junit4)
+    testImplementation(TestLibraries.koinTest)
 
     // Android tests
     androidTestImplementation(TestLibraries.junit)
     androidTestImplementation(TestLibraries.testRunner)
     androidTestImplementation(TestLibraries.espresso)
+
+    // Instrumentation Tests
+    androidTestImplementation(TestLibraries.koinTest)
 }

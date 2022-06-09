@@ -16,9 +16,23 @@ object Versions {
     const val testRunner = "1.4.1-alpha03"
     const val espresso = "3.5.0-alpha03"
 
-
     // Gradle Plugins
     const val ktlint = "10.2.1"
+
+    //DI - KOIN
+    const val koin = "3.2.0"
+
+    //Networking
+    const val retrofit = "2.9.0"
+    const val okhttp = "4.8.1"
+    const val loggingInterceptor = "4.8.1"
+    const val moshi = "1.9.3"
+
+    // Lifecycle
+    const val lifecycle = "2.4.1"
+
+    // Coroutines
+    const val coroutines = "1.3.9"
 
 }
 
@@ -38,6 +52,30 @@ object Libraries {
         "androidx.constraintlayout:constraintlayout:${Versions.constraintLayout}"
     const val ktxCore = "androidx.core:core-ktx:${Versions.ktx}"
     const val materialComponents = "com.google.android.material:material:${Versions.material}"
+
+    // DI - KOIN
+    const val koin = "org.koin:koin-android:${Versions.koin}"
+    const val koinViewModel = "org.koin:koin-androidx-viewmodel:${Versions.koin}"
+
+    // Networking - apollo, OKHTTP and loggingInterceptor
+    const val retrofit = "com.squareup.retrofit2:retrofit:${Versions.retrofit}"
+    const val moshi = "com.squareup.moshi:moshi-kotlin:${Versions.moshi}"
+    const val moshiConverter = "com.squareup.retrofit2:converter-moshi:${Versions.retrofit}"
+    const val okhttp = "com.squareup.okhttp3:okhttp:${Versions.okhttp}"
+    const val loggingInterceptor =
+        "com.squareup.okhttp3:logging-interceptor:${Versions.loggingInterceptor}"
+
+    // Lifecycle
+    const val viewModel = "androidx.lifecycle:lifecycle-viewmodel-ktx:${Versions.lifecycle}"
+    const val livedata = "androidx.lifecycle:lifecycle-livedata-ktx:${Versions.lifecycle}"
+    const val lifecycle = "androidx.lifecycle:lifecycle-runtime-ktx:${Versions.lifecycle}"
+
+    // Coroutines
+    const val coroutines = "org.jetbrains.kotlinx:kotlinx-coroutines-core:${Versions.coroutines}"
+    const val coroutinesAndroid =
+        "org.jetbrains.kotlinx:kotlinx-coroutines-android:${Versions.coroutines}"
+
+
 }
 
 object TestLibraries {
@@ -47,6 +85,7 @@ object TestLibraries {
     const val testRunner = "androidx.test:runner:${Versions.testRunner}"
     const val espresso = "androidx.test.espresso:espresso-core:${Versions.espresso}"
 
+    const val koinTest = "org.koin:koin-test:${Versions.koin}"
 
 }
 
