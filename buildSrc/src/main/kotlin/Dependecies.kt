@@ -20,7 +20,7 @@ object Versions {
     const val ktlint = "10.2.1"
 
     //DI - KOIN
-    const val koin = "2.1.5"
+    const val koin = "3.2.0"
 
     //Networking
     const val retrofit = "2.9.0"
@@ -54,8 +54,7 @@ object Libraries {
     const val materialComponents = "com.google.android.material:material:${Versions.material}"
 
     // DI - KOIN
-    const val koin = "org.koin:koin-android:${Versions.koin}"
-    const val koinViewModel = "org.koin:koin-androidx-viewmodel:${Versions.koin}"
+    const val koin = "io.insert-koin:koin-android:${Versions.koin}"
 
     // Networking - apollo, OKHTTP and loggingInterceptor
     const val retrofit = "com.squareup.retrofit2:retrofit:${Versions.retrofit}"
@@ -85,7 +84,7 @@ object TestLibraries {
     const val testRunner = "androidx.test:runner:${Versions.testRunner}"
     const val espresso = "androidx.test.espresso:espresso-core:${Versions.espresso}"
 
-    const val koinTest = "org.koin:koin-test:${Versions.koin}"
+    const val koinTest = "io.insert-koin:koin-test:${Versions.koin}"
 
 }
 

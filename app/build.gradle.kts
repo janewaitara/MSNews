@@ -44,7 +44,6 @@ dependencies {
 
     // DI - KOIN
     implementation(Libraries.koin)
-    implementation(Libraries.koinViewModel)
 
     // Networking
     implementation(Libraries.retrofit)
