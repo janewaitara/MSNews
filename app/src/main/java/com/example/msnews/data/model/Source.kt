@@ -1,4 +1,4 @@
-package com.example.msnews.model
+package com.example.msnews.data.model
 
 data class Source(
     val id: String?,

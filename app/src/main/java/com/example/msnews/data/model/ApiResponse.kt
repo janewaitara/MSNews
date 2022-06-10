@@ -1,4 +1,4 @@
-package com.example.msnews.model
+package com.example.msnews.data.model
 
 /**
  * This data class defines an api response which includes the status, total results and articles.
