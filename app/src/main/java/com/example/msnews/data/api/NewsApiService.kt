@@ -1,6 +1,7 @@
 package com.example.msnews.data.api
 
 import com.example.msnews.data.model.ApiResponse
+import retrofit2.Response
 import retrofit2.http.GET
 import retrofit2.http.Query
 
@@ -10,12 +11,12 @@ interface NewsApiService {
         @Query("category") category: String,
         @Query("language") language: String,
         @Query("apiKey") apiKey: String,
-    ): ApiResponse
+    ): Response<ApiResponse>
 
     @GET("v2/everything")
     suspend fun getSearchedNews(
         @Query("q") searchQuery: String,
         @Query("language") language: String,
         @Query("apiKey") apiKey: String,
-    ): ApiResponse
+    ): Response<ApiResponse>
 }

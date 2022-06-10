@@ -1,3 +1,6 @@
+import java.io.FileInputStream
+import java.util.Properties
+
 plugins {
     id(BuildPlugins.androidApplication)
     id(BuildPlugins.kotlinAndroid)
@@ -15,6 +18,8 @@ android {
         versionName = AndroidSdk.versionName
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
+
+        buildConfigField("String", "API_KEY", getBearerTokenFromFile())
     }
 
     buildTypes {
@@ -72,4 +77,13 @@ dependencies {
 
     // Instrumentation Tests
     androidTestImplementation(TestLibraries.koinTest)
+}
+
+fun getBearerTokenFromFile(): String {
+    val secretsFile = rootProject.file("secrets.properties")
+    val secrets = Properties()
+    if (secretsFile.exists()) {
+        secrets.load(FileInputStream(secretsFile))
+    }
+    return secrets.getProperty("API_KEY", "")
 }
