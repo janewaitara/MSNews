@@ -2,6 +2,7 @@ package com.example.msnews.data.di
 
 import com.example.msnews.data.api.NewsApiService
 import com.example.msnews.data.repository.NewsRepository
+import com.example.msnews.data.repository.NewsRepositoryImpl
 import com.example.msnews.data.utils.Constants.REST_BASE_URL
 import com.squareup.moshi.Moshi
 import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
@@ -13,6 +14,10 @@ import retrofit2.converter.moshi.MoshiConverterFactory
 import java.util.concurrent.TimeUnit
 
 val networkModule = module {
+    /**
+     * Single = singleton =  instance of an object that only exist once during the whole
+     * application lifetime
+     * */
 
     // OKHTTPClient class
     single {
@@ -54,6 +59,6 @@ val apiModule = module {
     single { NewsApiService::class.java }
 }
 
-val repositoryModule = module{
-    single{ NewsRepository(get())}
+val repositoryModule = module {
+    single<NewsRepository> { NewsRepositoryImpl(get()) }
 }
