@@ -1,6 +1,7 @@
 package com.example.msnews.data.di
 
 import com.example.msnews.data.api.NewsApiService
+import com.example.msnews.data.repository.NewsRepository
 import com.example.msnews.data.utils.Constants.REST_BASE_URL
 import com.squareup.moshi.Moshi
 import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
@@ -51,4 +52,8 @@ val networkModule = module {
 
 val apiModule = module {
     single { NewsApiService::class.java }
+}
+
+val repositoryModule = module{
+    single{ NewsRepository(get())}
 }
