@@ -66,6 +66,10 @@ dependencies {
     implementation(Libraries.coroutines)
     implementation(Libraries.coroutinesAndroid)
 
+    // Navigation
+    implementation(Libraries.navigationUI)
+    implementation(Libraries.navigationFragment)
+
     // Unit Tests
     testImplementation(TestLibraries.junit4)
     testImplementation(TestLibraries.koinTest)
