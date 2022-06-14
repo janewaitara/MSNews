@@ -11,7 +11,7 @@ class NewsRepositoryImpl(private val newsApi: NewsApiService) : NewsRepository {
 
     override suspend fun getTopHeadlinesFromApi(
         category: String,
-        language: String,
+        language: String
     ): Resource<ApiResponse> = try {
 
         val apiResult = newsApi.getTopHeadlines(category, language, BuildConfig.API_KEY)
