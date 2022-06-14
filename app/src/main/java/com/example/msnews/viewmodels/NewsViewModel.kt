@@ -19,9 +19,9 @@ class NewsViewModel(
     private val _listOfSearchedArticles = MutableLiveData<List<Article>>()
     private val _article = MutableLiveData<Article>()
 
-    private val topArticles: LiveData<List<Article>> = _listOfTopArticles
-    private val searchedArticles: LiveData<List<Article>> = _listOfSearchedArticles
-    private val article: LiveData<Article> = _article
+    val listOfTopArticles: LiveData<List<Article>> = _listOfTopArticles
+    val listOfSearchedArticles: LiveData<List<Article>> = _listOfSearchedArticles
+    val article: LiveData<Article> = _article
     val status: LiveData<Resource<ApiResponse>> = _status
 
     fun getTopHeadlinesFromApi(

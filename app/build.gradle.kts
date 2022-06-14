@@ -5,6 +5,7 @@ plugins {
     id(BuildPlugins.androidApplication)
     id(BuildPlugins.kotlinAndroid)
     id(BuildPlugins.ktlintPlugin)
+    // id("kotlin-kapt")
 }
 
 android {
@@ -27,6 +28,9 @@ android {
             isMinifyEnabled = false
             proguardFiles(getDefaultProguardFile("proguard-android-optimize.txt"), "proguard-rules.pro")
         }
+    }
+    buildFeatures {
+        dataBinding = true
     }
 
     compileOptions {
