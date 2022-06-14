@@ -3,6 +3,7 @@ package com.example.msnews
 import android.app.Application
 import com.example.msnews.data.di.apiModule
 import com.example.msnews.data.di.networkModule
+import com.example.msnews.data.di.presentationModule
 import com.example.msnews.data.di.repositoryModule
 import org.koin.android.ext.koin.androidContext
 import org.koin.android.ext.koin.androidLogger
@@ -26,7 +27,8 @@ class NewsApplication : Application() {
                 listOf(
                     networkModule,
                     apiModule,
-                    repositoryModule
+                    repositoryModule,
+                    presentationModule
                 )
             )
         }

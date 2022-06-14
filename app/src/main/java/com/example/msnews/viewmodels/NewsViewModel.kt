@@ -10,7 +10,7 @@ import com.example.msnews.data.model.Resource
 import com.example.msnews.data.repository.NewsRepository
 import kotlinx.coroutines.launch
 
-class TopHeadlinesViewModel(
+class NewsViewModel(
     private val newsRepository: NewsRepository
 ) : ViewModel() {
 
