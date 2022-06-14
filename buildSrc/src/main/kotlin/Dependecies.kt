@@ -34,6 +34,9 @@ object Versions {
     // Coroutines
     const val coroutines = "1.3.9"
 
+    // Navigation
+    const val navigation = "2.4.2"
+
 }
 
 object BuildPlugins {
@@ -74,6 +77,9 @@ object Libraries {
     const val coroutinesAndroid =
         "org.jetbrains.kotlinx:kotlinx-coroutines-android:${Versions.coroutines}"
 
+    // Navigation
+    const val navigationUI = "androidx.navigation:navigation-ui-ktx:${Versions.navigation}"
+    const val navigationFragment = "androidx.navigation:navigation-fragment-ktx:${Versions.navigation}"
 
 }
 
