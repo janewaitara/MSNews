@@ -67,6 +67,7 @@ class NewsViewModel(
 
     fun setCategory(selectedCategory: String) {
         _categoryFilter.value = selectedCategory
+        getTopHeadlinesFromApi(selectedCategory, "en")
     }
 
     fun hasNoCategorySet(): Boolean {

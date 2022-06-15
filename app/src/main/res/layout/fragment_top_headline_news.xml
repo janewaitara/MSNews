@@ -20,13 +20,12 @@
             android:id="@+id/heading_top_headlines_news"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@{viewModel.listOfTopArticles[1].url}"
+            android:text="@string/top_headlines_news"
             android:textSize="24sp"
             android:textStyle="bold"
             app:layout_constraintEnd_toEndOf="@+id/news_image"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            tools:text="Top Headlines News" />
+            app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
             android:id="@+id/text_heading_desc"
@@ -148,8 +147,8 @@
             android:layout_width="0dp"
             android:layout_height="0dp"
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/chips_horizontal_scroll"
             app:listData="@{viewModel.listOfTopArticles}"

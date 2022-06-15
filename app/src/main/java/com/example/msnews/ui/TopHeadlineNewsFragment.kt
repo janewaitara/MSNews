@@ -34,9 +34,6 @@ class TopHeadlineNewsFragment : Fragment() {
         binding =
             DataBindingUtil.inflate(inflater, R.layout.fragment_top_headline_news, container, false)
 
-        // call the view model method that calls the news api
-        sharedViewModel.getTopHeadlinesFromApi("health", "en")
-
         // Allows Data Binding to Observe LiveData with the lifecycle of this Fragment
         binding.lifecycleOwner = this
 
