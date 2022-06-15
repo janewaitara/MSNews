@@ -19,7 +19,7 @@ import org.koin.androidx.viewmodel.ext.android.sharedViewModel
 class TopHeadlineNewsFragment : Fragment() {
 
     // lazy delegate property to inject shared ViewModel instance into a property using koin
-    private val viewModel: NewsViewModel by sharedViewModel()
+    private val sharedViewModel: NewsViewModel by sharedViewModel()
     private lateinit var binding: FragmentTopHeadlineNewsBinding
 
     override fun onCreateView(
@@ -32,13 +32,13 @@ class TopHeadlineNewsFragment : Fragment() {
             DataBindingUtil.inflate(inflater, R.layout.fragment_top_headline_news, container, false)
 
         // call the view model method that calls the amphibians api
-        viewModel.getTopHeadlinesFromApi("health", "en")
+        sharedViewModel.getTopHeadlinesFromApi("health", "en")
 
         // Allows Data Binding to Observe LiveData with the lifecycle of this Fragment
         binding.lifecycleOwner = this
 
         // Giving the binding access to the OverviewViewModel
-        binding.viewModel = viewModel
+        binding.viewModel = sharedViewModel
 
         return binding.root
     }

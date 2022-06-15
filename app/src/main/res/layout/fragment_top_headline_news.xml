@@ -71,8 +71,9 @@
                     style="@style/Widget.Material3.Chip.Filter"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:checked="true"
+                    android:checked="@{viewModel.categoryFilter.equals(@string/general)}"
                     android:text="@string/general"
+                    android:onClick="@{() -> viewModel.setCategory(@string/general)}"
                     app:checkedIconEnabled="false" />
 
                 <com.google.android.material.chip.Chip
@@ -80,27 +81,39 @@
                     style="@style/Widget.Material3.Chip.Filter"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@string/technology" />
+                    android:checked="@{viewModel.categoryFilter.equals(@string/technology)}"
+                    android:onClick="@{() -> viewModel.setCategory(@string/technology)}"
+                    android:text="@string/technology"
+                    app:checkedIconEnabled="false"/>
 
                 <com.google.android.material.chip.Chip
                     android:id="@+id/chip"
                     style="@style/Widget.Material3.Chip.Filter"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@string/health" />
+                    android:checked="@{viewModel.categoryFilter.equals(@string/health)}"
+                    android:onClick="@{() -> viewModel.setCategory(@string/health)}"
+                    android:text="@string/health"
+                    app:checkedIconEnabled="false"/>
 
                 <com.google.android.material.chip.Chip
                     android:id="@+id/business_chip"
                     style="@style/Widget.Material3.Chip.Filter"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@string/business" />
+                    android:checked="@{viewModel.categoryFilter.equals(@string/business)}"
+                    android:onClick="@{() -> viewModel.setCategory(@string/business)}"
+                    android:text="@string/business"
+                    app:checkedIconEnabled="false"/>
 
                 <com.google.android.material.chip.Chip
                     android:id="@+id/entertainment_chip"
                     style="@style/Widget.Material3.Chip.Filter"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    app:checkedIconEnabled="false"
+                    android:checked="@{viewModel.categoryFilter.equals(@string/entertainment)}"
+                    android:onClick="@{() -> viewModel.setCategory(@string/entertainment)}"
                     android:text="@string/entertainment" />
 
                 <com.google.android.material.chip.Chip
@@ -108,6 +121,9 @@
                     style="@style/Widget.Material3.Chip.Filter"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    app:checkedIconEnabled="false"
+                    android:checked="@{viewModel.categoryFilter.equals(@string/science)}"
+                    android:onClick="@{() -> viewModel.setCategory(@string/science)}"
                     android:text="@string/science" />
 
 
@@ -116,6 +132,9 @@
                     style="@style/Widget.Material3.Chip.Filter"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    app:checkedIconEnabled="false"
+                    android:checked="@{viewModel.categoryFilter.equals(@string/sports)}"
+                    android:onClick="@{() -> viewModel.setCategory(@string/sports)}"
                     android:text="@string/sports" />
                 <!-- Chips can be declared here, or added dynamically. -->
 
