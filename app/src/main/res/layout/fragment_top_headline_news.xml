@@ -154,6 +154,46 @@
             app:listData="@{viewModel.listOfTopArticles}"
             tools:listitem="@layout/news_view_item" />
 
+        <com.facebook.shimmer.ShimmerFrameLayout
+            android:id="@+id/shimmer_frame_layout"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:orientation="vertical"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/chips_horizontal_scroll">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <!-- Adding 10 rows of placeholders-->
+
+                <include layout="@layout/loading_shimmer_effect" />
+
+                <include layout="@layout/loading_shimmer_effect" />
+
+                <include layout="@layout/loading_shimmer_effect" />
+
+                <include layout="@layout/loading_shimmer_effect" />
+
+                <include layout="@layout/loading_shimmer_effect" />
+
+                <include layout="@layout/loading_shimmer_effect" />
+
+                <include layout="@layout/loading_shimmer_effect" />
+
+                <include layout="@layout/loading_shimmer_effect" />
+
+                <include layout="@layout/loading_shimmer_effect" />
+
+                <include layout="@layout/loading_shimmer_effect" />
+
+            </LinearLayout>
+        </com.facebook.shimmer.ShimmerFrameLayout>
+
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

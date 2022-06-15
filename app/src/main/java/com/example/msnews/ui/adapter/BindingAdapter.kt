@@ -30,8 +30,8 @@ fun bindImage(imageView: ImageView, imageUrl: String?) {
 /**
  * Use a BindingAdapter to initialize the PhotoGridAdapter with the list of MarsPhoto objects.
  * Using a BindingAdapter to set the RecyclerView data causes data binding to automatically
- * observe the LiveData for the list of MarsPhoto objects. Then the binding adapter is called
- * automatically when the MarsPhoto list changes.
+ * observe the LiveData for the list of article objects. Then the binding adapter is called
+ * automatically when the articles list changes.
  * */
 @BindingAdapter("listData")
 fun bindRecyclerView(recyclerView: RecyclerView, data: List<Article>?) {

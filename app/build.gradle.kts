@@ -77,6 +77,8 @@ dependencies {
     // Coil
     implementation(Libraries.coil)
 
+    // shimmer Effect
+    implementation(Libraries.shimmerEffect)
     // Unit Tests
     testImplementation(TestLibraries.junit4)
     testImplementation(TestLibraries.koinTest)

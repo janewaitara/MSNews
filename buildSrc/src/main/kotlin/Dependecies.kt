@@ -84,6 +84,9 @@ object Libraries {
     //Coil
     const val coil = "io.coil-kt:coil:1.1.1"
 
+    //Shimmer Effect
+    const val shimmerEffect = "com.facebook.shimmer:shimmer:0.5.0"
+
 }
 
 object TestLibraries {
