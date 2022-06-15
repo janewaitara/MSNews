@@ -8,7 +8,7 @@ object Versions {
     const val appCompat = "1.4.1"
     const val constraintLayout = "2.1.4"
     const val ktx = "1.7.0"
-    const val material = "1.6.0-alpha02"
+    const val material = "1.6.1"
 
     //Version codes for all the test libraries
     const val junit4 = "4.13.2"

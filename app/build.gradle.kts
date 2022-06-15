@@ -5,7 +5,7 @@ plugins {
     id(BuildPlugins.androidApplication)
     id(BuildPlugins.kotlinAndroid)
     id(BuildPlugins.ktlintPlugin)
-    // id("kotlin-kapt")
+    id("kotlin-kapt")
 }
 
 android {
