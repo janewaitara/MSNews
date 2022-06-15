@@ -1,12 +1,16 @@
 package com.example.msnews.ui.adapter
 
+import android.view.View
 import android.widget.ImageView
 import androidx.core.net.toUri
 import androidx.databinding.BindingAdapter
 import androidx.recyclerview.widget.RecyclerView
 import coil.load
 import com.example.msnews.R
+import com.example.msnews.data.model.ApiResponse
 import com.example.msnews.data.model.Article
+import com.example.msnews.data.model.Resource
+import com.facebook.shimmer.ShimmerFrameLayout
 
 /**
  *The first method parameter is the type of the target View and
@@ -37,4 +41,21 @@ fun bindImage(imageView: ImageView, imageUrl: String?) {
 fun bindRecyclerView(recyclerView: RecyclerView, data: List<Article>?) {
     val adapter = recyclerView.adapter as ArticlesAdapter
     adapter.submitList(data) // tells the RecyclerView when a new list is available.
+}
+
+@BindingAdapter("newsStatus")
+fun bindStatusWithShimmer(shimmerFrameLayout: ShimmerFrameLayout, status: Resource<ApiResponse>) {
+    when (status) {
+        is Resource.Success -> {
+            shimmerFrameLayout.stopShimmer()
+            shimmerFrameLayout.visibility = View.GONE
+        }
+        is Resource.Loading -> {
+            shimmerFrameLayout.visibility = View.VISIBLE
+        }
+        is Resource.Error -> {
+            shimmerFrameLayout.visibility = View.GONE
+            shimmerFrameLayout.visibility = View.VISIBLE
+        }
+    }
 }
