@@ -43,6 +43,7 @@
             android:id="@+id/news_image"
             android:layout_width="64dp"
             android:layout_height="0dp"
+            android:contentDescription="@string/news_illustration_content"
             android:src="@color/cardview_dark_background"
             app:layout_constraintBottom_toBottomOf="@id/text_heading_desc"
             app:layout_constraintEnd_toEndOf="parent"
@@ -50,6 +51,7 @@
             app:layout_constraintTop_toTopOf="@+id/heading_top_headlines_news" />
 
         <HorizontalScrollView
+            android:id="@+id/chips_horizontal_scroll"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/spacing_24dp"
@@ -58,7 +60,7 @@
             app:layout_constraintTop_toBottomOf="@+id/text_heading_desc">
 
             <com.google.android.material.chip.ChipGroup
-                android:id="@+id/chipGroupFilter"
+                android:id="@+id/chip_group_filter"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 app:chipSpacingHorizontal="@dimen/spacing_8dp"
@@ -72,8 +74,8 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:checked="@{viewModel.categoryFilter.equals(@string/general)}"
-                    android:text="@string/general"
                     android:onClick="@{() -> viewModel.setCategory(@string/general)}"
+                    android:text="@string/general"
                     app:checkedIconEnabled="false" />
 
                 <com.google.android.material.chip.Chip
@@ -84,7 +86,7 @@
                     android:checked="@{viewModel.categoryFilter.equals(@string/technology)}"
                     android:onClick="@{() -> viewModel.setCategory(@string/technology)}"
                     android:text="@string/technology"
-                    app:checkedIconEnabled="false"/>
+                    app:checkedIconEnabled="false" />
 
                 <com.google.android.material.chip.Chip
                     android:id="@+id/chip"
@@ -94,7 +96,7 @@
                     android:checked="@{viewModel.categoryFilter.equals(@string/health)}"
                     android:onClick="@{() -> viewModel.setCategory(@string/health)}"
                     android:text="@string/health"
-                    app:checkedIconEnabled="false"/>
+                    app:checkedIconEnabled="false" />
 
                 <com.google.android.material.chip.Chip
                     android:id="@+id/business_chip"
@@ -104,27 +106,27 @@
                     android:checked="@{viewModel.categoryFilter.equals(@string/business)}"
                     android:onClick="@{() -> viewModel.setCategory(@string/business)}"
                     android:text="@string/business"
-                    app:checkedIconEnabled="false"/>
+                    app:checkedIconEnabled="false" />
 
                 <com.google.android.material.chip.Chip
                     android:id="@+id/entertainment_chip"
                     style="@style/Widget.Material3.Chip.Filter"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    app:checkedIconEnabled="false"
                     android:checked="@{viewModel.categoryFilter.equals(@string/entertainment)}"
                     android:onClick="@{() -> viewModel.setCategory(@string/entertainment)}"
-                    android:text="@string/entertainment" />
+                    android:text="@string/entertainment"
+                    app:checkedIconEnabled="false" />
 
                 <com.google.android.material.chip.Chip
                     android:id="@+id/science_chip"
                     style="@style/Widget.Material3.Chip.Filter"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    app:checkedIconEnabled="false"
                     android:checked="@{viewModel.categoryFilter.equals(@string/science)}"
                     android:onClick="@{() -> viewModel.setCategory(@string/science)}"
-                    android:text="@string/science" />
+                    android:text="@string/science"
+                    app:checkedIconEnabled="false" />
 
 
                 <com.google.android.material.chip.Chip
@@ -132,14 +134,26 @@
                     style="@style/Widget.Material3.Chip.Filter"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    app:checkedIconEnabled="false"
                     android:checked="@{viewModel.categoryFilter.equals(@string/sports)}"
                     android:onClick="@{() -> viewModel.setCategory(@string/sports)}"
-                    android:text="@string/sports" />
+                    android:text="@string/sports"
+                    app:checkedIconEnabled="false" />
                 <!-- Chips can be declared here, or added dynamically. -->
 
             </com.google.android.material.chip.ChipGroup>
         </HorizontalScrollView>
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/news_Recycler_view"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/chips_horizontal_scroll"
+            app:listData="@{viewModel.listOfTopArticles}"
+            tools:listitem="@layout/news_view_item" />
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>

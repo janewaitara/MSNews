@@ -74,6 +74,9 @@ dependencies {
     implementation(Libraries.navigationUI)
     implementation(Libraries.navigationFragment)
 
+    // Coil
+    implementation(Libraries.coil)
+
     // Unit Tests
     testImplementation(TestLibraries.junit4)
     testImplementation(TestLibraries.koinTest)

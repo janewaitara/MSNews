@@ -81,6 +81,9 @@ object Libraries {
     const val navigationUI = "androidx.navigation:navigation-ui-ktx:${Versions.navigation}"
     const val navigationFragment = "androidx.navigation:navigation-fragment-ktx:${Versions.navigation}"
 
+    //Coil
+    const val coil = "io.coil-kt:coil:1.1.1"
+
 }
 
 object TestLibraries {
