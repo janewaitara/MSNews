@@ -8,7 +8,7 @@ object Versions {
     const val appCompat = "1.4.1"
     const val constraintLayout = "2.1.4"
     const val ktx = "1.7.0"
-    const val material = "1.6.0-alpha02"
+    const val material = "1.6.1"
 
     //Version codes for all the test libraries
     const val junit4 = "4.13.2"
@@ -80,6 +80,12 @@ object Libraries {
     // Navigation
     const val navigationUI = "androidx.navigation:navigation-ui-ktx:${Versions.navigation}"
     const val navigationFragment = "androidx.navigation:navigation-fragment-ktx:${Versions.navigation}"
+
+    //Coil
+    const val coil = "io.coil-kt:coil:1.1.1"
+
+    //Shimmer Effect
+    const val shimmerEffect = "com.facebook.shimmer:shimmer:0.5.0"
 
 }
 

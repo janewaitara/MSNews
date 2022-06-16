@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
@@ -9,17 +10,191 @@
             type="com.example.msnews.viewmodels.NewsViewModel" />
     </data>
 
-    <FrameLayout
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:layout_margin="16dp"
         tools:context=".ui.TopHeadlineNewsFragment">
 
-        <!-- TODO: Update blank fragment layout -->
         <TextView
-            android:id="@+id/test_api"
+            android:id="@+id/heading_top_headlines_news"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:text="@{viewModel.listOfTopArticles[1].url}" />
+            android:layout_height="wrap_content"
+            android:text="@string/top_headlines_news"
+            android:textSize="24sp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="@+id/news_image"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
-    </FrameLayout>
+        <TextView
+            android:id="@+id/text_heading_desc"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/spacing_8dp"
+            android:text="@string/heading_desc"
+            android:textSize="16sp"
+            app:layout_constraintEnd_toEndOf="@+id/news_image"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/heading_top_headlines_news" />
+
+        <ImageView
+            android:id="@+id/news_image"
+            android:layout_width="64dp"
+            android:layout_height="0dp"
+            android:contentDescription="@string/news_illustration_content"
+            android:src="@color/cardview_dark_background"
+            app:layout_constraintBottom_toBottomOf="@id/text_heading_desc"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/heading_top_headlines_news"
+            app:layout_constraintTop_toTopOf="@+id/heading_top_headlines_news" />
+
+        <HorizontalScrollView
+            android:id="@+id/chips_horizontal_scroll"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/spacing_24dp"
+            android:scrollbars="none"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/text_heading_desc">
+
+            <com.google.android.material.chip.ChipGroup
+                android:id="@+id/chip_group_filter"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:chipSpacingHorizontal="@dimen/spacing_8dp"
+                app:selectionRequired="true"
+                app:singleLine="true"
+                app:singleSelection="true">
+
+                <com.google.android.material.chip.Chip
+                    android:id="@+id/general_chip"
+                    style="@style/Widget.Material3.Chip.Filter"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:checked="@{viewModel.categoryFilter.equals(@string/general)}"
+                    android:onClick="@{() -> viewModel.setCategory(@string/general)}"
+                    android:text="@string/general"
+                    app:checkedIconEnabled="false" />
+
+                <com.google.android.material.chip.Chip
+                    android:id="@+id/technology_chip"
+                    style="@style/Widget.Material3.Chip.Filter"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:checked="@{viewModel.categoryFilter.equals(@string/technology)}"
+                    android:onClick="@{() -> viewModel.setCategory(@string/technology)}"
+                    android:text="@string/technology"
+                    app:checkedIconEnabled="false" />
+
+                <com.google.android.material.chip.Chip
+                    android:id="@+id/chip"
+                    style="@style/Widget.Material3.Chip.Filter"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:checked="@{viewModel.categoryFilter.equals(@string/health)}"
+                    android:onClick="@{() -> viewModel.setCategory(@string/health)}"
+                    android:text="@string/health"
+                    app:checkedIconEnabled="false" />
+
+                <com.google.android.material.chip.Chip
+                    android:id="@+id/business_chip"
+                    style="@style/Widget.Material3.Chip.Filter"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:checked="@{viewModel.categoryFilter.equals(@string/business)}"
+                    android:onClick="@{() -> viewModel.setCategory(@string/business)}"
+                    android:text="@string/business"
+                    app:checkedIconEnabled="false" />
+
+                <com.google.android.material.chip.Chip
+                    android:id="@+id/entertainment_chip"
+                    style="@style/Widget.Material3.Chip.Filter"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:checked="@{viewModel.categoryFilter.equals(@string/entertainment)}"
+                    android:onClick="@{() -> viewModel.setCategory(@string/entertainment)}"
+                    android:text="@string/entertainment"
+                    app:checkedIconEnabled="false" />
+
+                <com.google.android.material.chip.Chip
+                    android:id="@+id/science_chip"
+                    style="@style/Widget.Material3.Chip.Filter"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:checked="@{viewModel.categoryFilter.equals(@string/science)}"
+                    android:onClick="@{() -> viewModel.setCategory(@string/science)}"
+                    android:text="@string/science"
+                    app:checkedIconEnabled="false" />
+
+
+                <com.google.android.material.chip.Chip
+                    android:id="@+id/sports_chip"
+                    style="@style/Widget.Material3.Chip.Filter"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:checked="@{viewModel.categoryFilter.equals(@string/sports)}"
+                    android:onClick="@{() -> viewModel.setCategory(@string/sports)}"
+                    android:text="@string/sports"
+                    app:checkedIconEnabled="false" />
+                <!-- Chips can be declared here, or added dynamically. -->
+
+            </com.google.android.material.chip.ChipGroup>
+        </HorizontalScrollView>
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/news_Recycler_view"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/chips_horizontal_scroll"
+            app:listData="@{viewModel.listOfTopArticles}"
+            tools:listitem="@layout/news_view_item" />
+
+        <com.facebook.shimmer.ShimmerFrameLayout
+            android:id="@+id/shimmer_frame_layout"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:orientation="vertical"
+            app:newsStatus="@{viewModel.status}"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/chips_horizontal_scroll">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <!-- Adding 10 rows of placeholders-->
+
+                <include layout="@layout/loading_shimmer_effect" />
+
+                <include layout="@layout/loading_shimmer_effect" />
+
+                <include layout="@layout/loading_shimmer_effect" />
+
+                <include layout="@layout/loading_shimmer_effect" />
+
+                <include layout="@layout/loading_shimmer_effect" />
+
+                <include layout="@layout/loading_shimmer_effect" />
+
+                <include layout="@layout/loading_shimmer_effect" />
+
+                <include layout="@layout/loading_shimmer_effect" />
+
+                <include layout="@layout/loading_shimmer_effect" />
+
+                <include layout="@layout/loading_shimmer_effect" />
+
+            </LinearLayout>
+        </com.facebook.shimmer.ShimmerFrameLayout>
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

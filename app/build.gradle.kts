@@ -5,7 +5,7 @@ plugins {
     id(BuildPlugins.androidApplication)
     id(BuildPlugins.kotlinAndroid)
     id(BuildPlugins.ktlintPlugin)
-    // id("kotlin-kapt")
+    id("kotlin-kapt")
 }
 
 android {
@@ -74,6 +74,11 @@ dependencies {
     implementation(Libraries.navigationUI)
     implementation(Libraries.navigationFragment)
 
+    // Coil
+    implementation(Libraries.coil)
+
+    // shimmer Effect
+    implementation(Libraries.shimmerEffect)
     // Unit Tests
     testImplementation(TestLibraries.junit4)
     testImplementation(TestLibraries.koinTest)

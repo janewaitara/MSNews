@@ -2,4 +2,15 @@
     <string name="app_name">MS News</string>
 <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="heading_desc">News from all over the world</string>
+    <string name="general">General</string>
+    <string name="technology">Technology</string>
+    <string name="health">Health</string>
+    <string name="business">Business</string>
+    <string name="entertainment">Entertainment</string>
+    <string name="science">Science</string>
+    <string name="sports">Sports</string>
+    <string name="news_illustration_content">News illustration</string>
+    <string name="sample_article_title">Ukraine war latest: Civilians trapped as last bridge to Severodonetsk destroyed - The Telegraph dsv</string>
+    <string name="top_headlines_news">Top Headlines News</string>
 </resources>

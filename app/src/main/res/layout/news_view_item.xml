@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="article"
+            type="com.example.msnews.data.model.Article" />
+
+        <variable
+            name="clickListener"
+            type="com.example.msnews.ui.adapter.ArticleListener" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingTop="@dimen/spacing_16dp"
+        android:paddingBottom="@dimen/spacing_16dp">
+
+        <ImageView
+            android:id="@+id/article_image"
+            android:layout_width="64dp"
+            android:layout_height="0dp"
+            android:layout_marginEnd="@dimen/spacing_8dp"
+            android:contentDescription="@string/news_illustration_content"
+            android:scaleType="fitXY"
+            app:imageUrl="@{article.urlToImage}"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@id/article_title"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:src="@tools:sample/backgrounds/scenic" />
+
+        <TextView
+            android:id="@+id/article_title"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="@{article.title}"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/article_image"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="@string/sample_article_title" />
+
+        <TextView
+            android:id="@+id/article_published_at"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/spacing_8dp"
+            android:layout_marginEnd="@dimen/spacing_24dp"
+            android:text="@{article.publishedAt}"
+            tools:text="Published At"
+            android:textSize="14sp"
+            app:layout_constraintEnd_toStartOf="@id/article_source_name"
+            app:layout_constraintStart_toStartOf="@id/article_title"
+            app:layout_constraintTop_toBottomOf="@+id/article_title" />
+
+        <TextView
+            android:id="@+id/article_source_name"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="@{article.source.name}"
+            tools:text="Source Name"
+            android:textSize="14sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/article_published_at"
+            app:layout_constraintTop_toTopOf="@+id/article_published_at" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>
