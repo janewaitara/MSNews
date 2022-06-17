@@ -2,6 +2,7 @@ package com.example.msnews.ui.adapter
 
 import android.view.View
 import android.widget.ImageView
+import android.widget.TextView
 import androidx.core.net.toUri
 import androidx.databinding.BindingAdapter
 import androidx.recyclerview.widget.RecyclerView
@@ -10,6 +11,7 @@ import com.example.msnews.R
 import com.example.msnews.data.model.ApiResponse
 import com.example.msnews.data.model.Article
 import com.example.msnews.data.model.Resource
+import com.example.msnews.data.utils.ExtensionFunctions.toFormattedDateAndTime
 import com.facebook.shimmer.ShimmerFrameLayout
 
 /**
@@ -58,4 +60,16 @@ fun bindStatusWithShimmer(shimmerFrameLayout: ShimmerFrameLayout, status: Resour
             shimmerFrameLayout.visibility = View.VISIBLE
         }
     }
+}
+
+@BindingAdapter("formattedText")
+fun formatPublishedAtToDateAndTime(textView: TextView, time: String) {
+    /* Assuming the function was not an extension function, this worked
+    textView.text = time.let {
+         ExtensionFunctions.toFormattedDateAndTime(it)
+    }*/
+
+    // textView.text = ExtensionFunctions.toFormattedDateAndTime(time)
+
+    textView.text = time.toFormattedDateAndTime(time)
 }
