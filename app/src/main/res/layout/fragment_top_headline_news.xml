@@ -18,22 +18,22 @@
 
         <TextView
             android:id="@+id/heading_top_headlines_news"
+            style="@style/Widget.NewsApp.TitleText"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/spacing_16dp"
             android:text="@string/top_headlines_news"
-            android:textSize="24sp"
-            android:textStyle="bold"
             app:layout_constraintEnd_toEndOf="@+id/news_image"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
             android:id="@+id/text_heading_desc"
+            style="@style/Widget.NewsApp.BodyNormalText"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/spacing_8dp"
             android:text="@string/heading_desc"
-            android:textSize="16sp"
             app:layout_constraintEnd_toEndOf="@+id/news_image"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/heading_top_headlines_news" />
@@ -159,11 +159,11 @@
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:orientation="vertical"
-            app:newsStatus="@{viewModel.status}"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/chips_horizontal_scroll">
+            app:layout_constraintTop_toBottomOf="@id/chips_horizontal_scroll"
+            app:newsStatus="@{viewModel.status}">
 
             <LinearLayout
                 android:layout_width="match_parent"

@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <!-- Body Super small - label style -->
+    <style name="Widget.NewsApp.SuperSmallText" parent="Widget.MaterialComponents.TextView">
+        <item name="fontFamily">@font/lato_regular</item>
+        <item name="android:textSize">12sp</item>
+        <item name="lineHeight">16sp</item>
+        <item name="android:letterSpacing">0.015</item>
+    </style>
+
+    <!-- Body Small Text - label style -->
+    <style name="Widget.NewsApp.BodySmallText" parent="Widget.MaterialComponents.TextView">
+        <item name="fontFamily">@font/lato_regular</item>
+        <item name="android:textSize">14sp</item>
+        <item name="lineHeight">20sp</item>
+        <item name="android:letterSpacing">0.01</item>
+    </style>
+
+    <!-- Body Normal Text - label style -->
+    <style name="Widget.NewsApp.BodyNormalText" parent="Widget.MaterialComponents.TextView">
+        <item name="fontFamily">@font/lato_regular</item>
+        <item name="android:textSize">16sp</item>
+        <item name="lineHeight">24sp</item>
+        <item name="android:letterSpacing">0</item>
+    </style>
+
+    <!-- Body Bold Text- label style -->
+    <style name="Widget.NewsApp.BodyBoldText" parent="Widget.MaterialComponents.TextView">
+        <item name="fontFamily">@font/lato_bold</item>
+        <item name="android:textSize">16sp</item>
+        <item name="lineHeight">24sp</item>
+        <item name="android:letterSpacing">0</item>
+    </style>
+
+    <!-- Sub Title Text - label style -->
+    <style name="Widget.NewsApp.SubTitleText" parent="Widget.MaterialComponents.TextView">
+        <item name="fontFamily">@font/lato_semi_bold</item>
+        <item name="android:textSize">20sp</item>
+        <item name="lineHeight">24sp</item>
+        <item name="android:letterSpacing">0</item>
+    </style>
+
+    <!--  Title Text - label style -->
+    <style name="Widget.NewsApp.TitleText" parent="Widget.MaterialComponents.TextView">
+        <item name="fontFamily">@font/lato_bold</item>
+        <item name="android:textSize">24sp</item>
+        <item name="lineHeight">32sp</item>
+        <item name="android:letterSpacing">0</item>
+    </style>
+
+</resources>

@@ -36,11 +36,10 @@
 
         <TextView
             android:id="@+id/article_title"
+            style="@style/Widget.NewsApp.BodyBoldText"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:text="@{article.title}"
-            android:textSize="18sp"
-            android:textStyle="bold"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@id/article_image"
             app:layout_constraintTop_toTopOf="parent"
@@ -48,11 +47,11 @@
 
         <TextView
             android:id="@+id/article_published_at"
+            style="@style/Widget.NewsApp.BodySmallText"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/spacing_8dp"
+            android:layout_marginTop="@dimen/spacing_16dp"
             android:layout_marginEnd="@dimen/spacing_24dp"
-            android:textSize="14sp"
             app:formattedText="@{article.publishedAt}"
             app:layout_constraintEnd_toStartOf="@id/article_source_name"
             app:layout_constraintStart_toStartOf="@id/article_title"
@@ -61,6 +60,7 @@
 
         <TextView
             android:id="@+id/article_source_name"
+            style="@style/Widget.NewsApp.BodySmallText"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:text="@{article.source.name}"
