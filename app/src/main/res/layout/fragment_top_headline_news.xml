@@ -23,6 +23,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/spacing_16dp"
             android:text="@string/top_headlines_news"
+            android:textColor="@color/dark_blue"
             app:layout_constraintEnd_toEndOf="@+id/news_image"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
@@ -34,6 +35,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/spacing_8dp"
             android:text="@string/heading_desc"
+            android:textColor="@color/primaryTextColor"
             app:layout_constraintEnd_toEndOf="@+id/news_image"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/heading_top_headlines_news" />
