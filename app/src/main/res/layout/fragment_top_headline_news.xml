@@ -13,7 +13,9 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_margin="16dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginStart="16dp"
         tools:context=".ui.TopHeadlineNewsFragment">
 
         <TextView
@@ -33,7 +35,7 @@
             style="@style/Widget.NewsApp.BodyNormalText"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/spacing_8dp"
+            android:layout_marginTop="@dimen/spacing_16dp"
             android:text="@string/heading_desc"
             android:textColor="@color/primaryTextColor"
             app:layout_constraintEnd_toEndOf="@+id/news_image"
@@ -55,7 +57,7 @@
             android:id="@+id/chips_horizontal_scroll"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/spacing_24dp"
+            android:layout_marginTop="@dimen/spacing_32dp"
             android:scrollbars="none"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/text_heading_desc">
