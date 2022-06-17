@@ -13,6 +13,7 @@
     <color name="blue">#3359DF</color>
     <color name="dark_blue">#1F3586</color>
     <color name="light_blue">#D6DEF9</color>
+    <color name="lightest_blue">#F5F7FD</color>
 
     <!-- Text Colors - Neutral -->
     <color name="DarkTextColor">#03102C</color>

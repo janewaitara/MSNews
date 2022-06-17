@@ -53,5 +53,8 @@
     <style name="Widget.NewsApp.FilterChip" parent="Widget.Material3.Chip.Filter">
         <item name="android:textAppearance">@style/Widget.NewsApp.BodyBoldText</item>
         <item name="chipMinHeight">40dp</item>
+        <item name="chipBackgroundColor">@color/chip_bg_color_state</item>
+        <item name="android:textColor">@color/chip_text_color_state</item>
+        <item name="chipStrokeColor">@color/light_blue</item>
     </style>
 </resources>
