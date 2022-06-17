@@ -49,4 +49,9 @@
         <item name="android:letterSpacing">0</item>
     </style>
 
+    <!--  Filter Chip Text - label style -->
+    <style name="Widget.NewsApp.FilterChip" parent="Widget.Material3.Chip.Filter">
+        <item name="android:textAppearance">@style/Widget.NewsApp.BodyBoldText</item>
+        <item name="chipMinHeight">40dp</item>
+    </style>
 </resources>

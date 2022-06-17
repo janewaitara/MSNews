@@ -69,7 +69,7 @@
 
                 <com.google.android.material.chip.Chip
                     android:id="@+id/general_chip"
-                    style="@style/Widget.Material3.Chip.Filter"
+                    style="@style/Widget.NewsApp.FilterChip"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:checked="@{viewModel.categoryFilter.equals(@string/general)}"
@@ -79,7 +79,7 @@
 
                 <com.google.android.material.chip.Chip
                     android:id="@+id/technology_chip"
-                    style="@style/Widget.Material3.Chip.Filter"
+                    style="@style/Widget.NewsApp.FilterChip"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:checked="@{viewModel.categoryFilter.equals(@string/technology)}"
@@ -89,7 +89,7 @@
 
                 <com.google.android.material.chip.Chip
                     android:id="@+id/chip"
-                    style="@style/Widget.Material3.Chip.Filter"
+                    style="@style/Widget.NewsApp.FilterChip"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:checked="@{viewModel.categoryFilter.equals(@string/health)}"
@@ -99,7 +99,7 @@
 
                 <com.google.android.material.chip.Chip
                     android:id="@+id/business_chip"
-                    style="@style/Widget.Material3.Chip.Filter"
+                    style="@style/Widget.NewsApp.FilterChip"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:checked="@{viewModel.categoryFilter.equals(@string/business)}"
@@ -109,7 +109,7 @@
 
                 <com.google.android.material.chip.Chip
                     android:id="@+id/entertainment_chip"
-                    style="@style/Widget.Material3.Chip.Filter"
+                    style="@style/Widget.NewsApp.FilterChip"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:checked="@{viewModel.categoryFilter.equals(@string/entertainment)}"
@@ -119,7 +119,7 @@
 
                 <com.google.android.material.chip.Chip
                     android:id="@+id/science_chip"
-                    style="@style/Widget.Material3.Chip.Filter"
+                    style="@style/Widget.NewsApp.FilterChip"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:checked="@{viewModel.categoryFilter.equals(@string/science)}"
@@ -130,7 +130,7 @@
 
                 <com.google.android.material.chip.Chip
                     android:id="@+id/sports_chip"
-                    style="@style/Widget.Material3.Chip.Filter"
+                    style="@style/Widget.NewsApp.FilterChip"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:checked="@{viewModel.categoryFilter.equals(@string/sports)}"
