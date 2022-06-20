@@ -36,11 +36,13 @@
 
         <TextView
             android:id="@+id/article_title"
+            style="@style/Widget.NewsApp.BodyBoldText"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:text="@{article.title}"
-            android:textSize="18sp"
-            android:textStyle="bold"
+            android:maxLines="2"
+            android:ellipsize = "end"
+            android:textColor="@color/DarkTextColor"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@id/article_image"
             app:layout_constraintTop_toTopOf="parent"
@@ -48,27 +50,29 @@
 
         <TextView
             android:id="@+id/article_published_at"
+            style="@style/Widget.NewsApp.BodySmallText"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/spacing_8dp"
+            android:layout_marginTop="@dimen/spacing_16dp"
             android:layout_marginEnd="@dimen/spacing_24dp"
-            android:text="@{article.publishedAt}"
-            tools:text="Published At"
-            android:textSize="14sp"
+            android:textColor="@color/subtleTextColor"
+            app:formattedText="@{article.publishedAt}"
             app:layout_constraintEnd_toStartOf="@id/article_source_name"
             app:layout_constraintStart_toStartOf="@id/article_title"
-            app:layout_constraintTop_toBottomOf="@+id/article_title" />
+            app:layout_constraintTop_toBottomOf="@+id/article_title"
+            tools:text="Published At" />
 
         <TextView
             android:id="@+id/article_source_name"
+            style="@style/Widget.NewsApp.BodySmallText"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:text="@{article.source.name}"
-            tools:text="Source Name"
-            android:textSize="14sp"
+            android:textColor="@color/subtleTextColor"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@id/article_published_at"
-            app:layout_constraintTop_toTopOf="@+id/article_published_at" />
+            app:layout_constraintTop_toTopOf="@+id/article_published_at"
+            tools:text="Source Name" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

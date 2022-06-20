@@ -13,27 +13,31 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_margin="16dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginStart="16dp"
         tools:context=".ui.TopHeadlineNewsFragment">
 
         <TextView
             android:id="@+id/heading_top_headlines_news"
+            style="@style/Widget.NewsApp.TitleText"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/spacing_16dp"
             android:text="@string/top_headlines_news"
-            android:textSize="24sp"
-            android:textStyle="bold"
+            android:textColor="@color/dark_blue"
             app:layout_constraintEnd_toEndOf="@+id/news_image"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
             android:id="@+id/text_heading_desc"
+            style="@style/Widget.NewsApp.BodyNormalText"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/spacing_8dp"
+            android:layout_marginTop="@dimen/spacing_16dp"
             android:text="@string/heading_desc"
-            android:textSize="16sp"
+            android:textColor="@color/primaryTextColor"
             app:layout_constraintEnd_toEndOf="@+id/news_image"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/heading_top_headlines_news" />
@@ -53,7 +57,7 @@
             android:id="@+id/chips_horizontal_scroll"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/spacing_24dp"
+            android:layout_marginTop="@dimen/spacing_32dp"
             android:scrollbars="none"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/text_heading_desc">
@@ -69,7 +73,7 @@
 
                 <com.google.android.material.chip.Chip
                     android:id="@+id/general_chip"
-                    style="@style/Widget.Material3.Chip.Filter"
+                    style="@style/Widget.NewsApp.FilterChip"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:checked="@{viewModel.categoryFilter.equals(@string/general)}"
@@ -79,7 +83,7 @@
 
                 <com.google.android.material.chip.Chip
                     android:id="@+id/technology_chip"
-                    style="@style/Widget.Material3.Chip.Filter"
+                    style="@style/Widget.NewsApp.FilterChip"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:checked="@{viewModel.categoryFilter.equals(@string/technology)}"
@@ -89,7 +93,7 @@
 
                 <com.google.android.material.chip.Chip
                     android:id="@+id/chip"
-                    style="@style/Widget.Material3.Chip.Filter"
+                    style="@style/Widget.NewsApp.FilterChip"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:checked="@{viewModel.categoryFilter.equals(@string/health)}"
@@ -99,7 +103,7 @@
 
                 <com.google.android.material.chip.Chip
                     android:id="@+id/business_chip"
-                    style="@style/Widget.Material3.Chip.Filter"
+                    style="@style/Widget.NewsApp.FilterChip"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:checked="@{viewModel.categoryFilter.equals(@string/business)}"
@@ -109,7 +113,7 @@
 
                 <com.google.android.material.chip.Chip
                     android:id="@+id/entertainment_chip"
-                    style="@style/Widget.Material3.Chip.Filter"
+                    style="@style/Widget.NewsApp.FilterChip"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:checked="@{viewModel.categoryFilter.equals(@string/entertainment)}"
@@ -119,7 +123,7 @@
 
                 <com.google.android.material.chip.Chip
                     android:id="@+id/science_chip"
-                    style="@style/Widget.Material3.Chip.Filter"
+                    style="@style/Widget.NewsApp.FilterChip"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:checked="@{viewModel.categoryFilter.equals(@string/science)}"
@@ -130,7 +134,7 @@
 
                 <com.google.android.material.chip.Chip
                     android:id="@+id/sports_chip"
-                    style="@style/Widget.Material3.Chip.Filter"
+                    style="@style/Widget.NewsApp.FilterChip"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:checked="@{viewModel.categoryFilter.equals(@string/sports)}"
@@ -159,11 +163,11 @@
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:orientation="vertical"
-            app:newsStatus="@{viewModel.status}"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/chips_horizontal_scroll">
+            app:layout_constraintTop_toBottomOf="@id/chips_horizontal_scroll"
+            app:newsStatus="@{viewModel.status}">
 
             <LinearLayout
                 android:layout_width="match_parent"
