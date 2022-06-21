@@ -13,45 +13,65 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:layout_marginStart="16dp"
         android:layout_marginTop="16dp"
         android:layout_marginEnd="16dp"
-        android:layout_marginStart="16dp"
         tools:context=".ui.TopHeadlineNewsFragment">
 
         <TextView
             android:id="@+id/heading_top_headlines_news"
             style="@style/Widget.NewsApp.TitleText"
-            android:layout_width="match_parent"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/spacing_16dp"
             android:text="@string/top_headlines_news"
             android:textColor="@color/dark_blue"
-            app:layout_constraintEnd_toEndOf="@+id/news_image"
+            app:layout_constraintEnd_toStartOf="@+id/search_news"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
             android:id="@+id/text_heading_desc"
             style="@style/Widget.NewsApp.BodyNormalText"
-            android:layout_width="match_parent"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/spacing_16dp"
             android:text="@string/heading_desc"
             android:textColor="@color/primaryTextColor"
-            app:layout_constraintEnd_toEndOf="@+id/news_image"
+            app:layout_constraintEnd_toStartOf="@+id/search_news"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/heading_top_headlines_news" />
 
         <ImageView
             android:id="@+id/news_image"
-            android:layout_width="64dp"
-            android:layout_height="0dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/search_bg"
             android:contentDescription="@string/news_illustration_content"
-            android:src="@color/cardview_dark_background"
+            android:src="@drawable/ic_search_24"
             app:layout_constraintBottom_toBottomOf="@id/text_heading_desc"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@id/heading_top_headlines_news"
             app:layout_constraintTop_toTopOf="@+id/heading_top_headlines_news" />
+
+        <RelativeLayout
+            android:id="@+id/search_news"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:background="@drawable/search_bg"
+            android:contentDescription="@string/news_illustration_content"
+            app:layout_constraintBottom_toBottomOf="@id/text_heading_desc"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/heading_top_headlines_news"
+            app:layout_constraintTop_toTopOf="@+id/heading_top_headlines_news">
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:layout_centerVertical="true"
+                android:src="@drawable/ic_search_24" />
+        </RelativeLayout>
 
         <HorizontalScrollView
             android:id="@+id/chips_horizontal_scroll"

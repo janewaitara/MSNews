@@ -3,6 +3,7 @@
     <dimen name="spacing_8dp">8dp</dimen>
     <dimen name="spacing_24dp">24dp</dimen>
     <dimen name="spacing_48dp">48dp</dimen>
+    <dimen name="spacing_64dp">64dp</dimen>
     <dimen name="spacing_32dp">32dp</dimen>
     <dimen name="spacing_16dp">16dp</dimen>
 </resources>
