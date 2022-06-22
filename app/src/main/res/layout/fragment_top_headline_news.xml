@@ -8,6 +8,10 @@
         <variable
             name="viewModel"
             type="com.example.msnews.viewmodels.NewsViewModel" />
+
+        <variable
+            name="topHeadlineNews"
+            type="com.example.msnews.ui.TopHeadlineNewsFragment" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -42,24 +46,14 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/heading_top_headlines_news" />
 
-        <ImageView
-            android:id="@+id/news_image"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:background="@drawable/search_bg"
-            android:contentDescription="@string/news_illustration_content"
-            android:src="@drawable/ic_search_24"
-            app:layout_constraintBottom_toBottomOf="@id/text_heading_desc"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@id/heading_top_headlines_news"
-            app:layout_constraintTop_toTopOf="@+id/heading_top_headlines_news" />
-
         <RelativeLayout
             android:id="@+id/search_news"
             android:layout_width="48dp"
             android:layout_height="48dp"
             android:background="@drawable/search_bg"
-            android:contentDescription="@string/news_illustration_content"
+            android:clickable="true"
+            android:focusable="true"
+            android:onClick="@{() -> topHeadlineNews.navigateToSearchScreen()}"
             app:layout_constraintBottom_toBottomOf="@id/text_heading_desc"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@id/heading_top_headlines_news"
@@ -70,6 +64,7 @@
                 android:layout_height="wrap_content"
                 android:layout_centerHorizontal="true"
                 android:layout_centerVertical="true"
+                android:contentDescription="@string/news_illustration_content"
                 android:src="@drawable/ic_search_24" />
         </RelativeLayout>
 

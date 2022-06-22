@@ -5,8 +5,10 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
+import androidx.navigation.fragment.findNavController
 import com.example.msnews.R
 import com.example.msnews.databinding.FragmentTopHeadlineNewsBinding
 import com.example.msnews.ui.adapter.ArticleListener
@@ -39,6 +41,7 @@ class TopHeadlineNewsFragment : Fragment() {
 
         // Giving the binding access to the OverviewViewModel
         binding.viewModel = sharedViewModel
+        binding.topHeadlineNews = this@TopHeadlineNewsFragment
 
         // binding the recyclerview to the adapter
         binding.newsRecyclerView.adapter = ArticlesAdapter(
@@ -50,5 +53,11 @@ class TopHeadlineNewsFragment : Fragment() {
 
         // Inflate the layout for this fragment
         return binding.root
+    }
+
+    fun navigateToSearchScreen() {
+        Log.d("News List", "Onclick worked")
+        Toast.makeText(context, "Nimeclickiwa", Toast.LENGTH_LONG).show()
+        findNavController().navigate(R.id.action_topHeadlineNewsFragment_to_searchNewsFragment)
     }
 }
