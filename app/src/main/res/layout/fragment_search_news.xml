@@ -1,14 +1,97 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".ui.SearchNewsFragment">
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
+    <data>
+        <variable
+            name="viewModel"
+            type="com.example.msnews.viewmodels.NewsViewModel" />
+
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment" />
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="16dp"
+        tools:context=".ui.SearchNewsFragment">
 
-</FrameLayout>
+        <TextView
+            android:id="@+id/search_news_heading"
+            style="@style/Widget.NewsApp.TitleText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/spacing_16dp"
+            android:text="@string/search_news"
+            android:textColor="@color/dark_blue"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <SearchView
+            android:id="@+id/search_input_field"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/spacing_16dp"
+            android:background="@drawable/search_field_bg"
+            android:iconifiedByDefault="false"
+            android:queryBackground="@android:color/transparent"
+            android:queryHint="@string/search_news"
+            app:layout_constraintTop_toBottomOf="@+id/search_news_heading" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/news_Recycler_view"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/search_input_field"
+            app:listData="@{viewModel.listOfSearchedArticles}"
+            tools:listitem="@layout/news_view_item" />
+
+        <com.facebook.shimmer.ShimmerFrameLayout
+            android:id="@+id/shimmer_frame_layout"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:orientation="vertical"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/search_input_field"
+            app:newsStatus= "@{viewModel.status}">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <!-- Adding 10 rows of placeholders-->
+
+                <include layout="@layout/loading_shimmer_effect" />
+
+                <include layout="@layout/loading_shimmer_effect" />
+
+                <include layout="@layout/loading_shimmer_effect" />
+
+                <include layout="@layout/loading_shimmer_effect" />
+
+                <include layout="@layout/loading_shimmer_effect" />
+
+                <include layout="@layout/loading_shimmer_effect" />
+
+                <include layout="@layout/loading_shimmer_effect" />
+
+                <include layout="@layout/loading_shimmer_effect" />
+
+                <include layout="@layout/loading_shimmer_effect" />
+
+                <include layout="@layout/loading_shimmer_effect" />
+
+            </LinearLayout>
+        </com.facebook.shimmer.ShimmerFrameLayout>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

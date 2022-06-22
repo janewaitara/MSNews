@@ -50,7 +50,7 @@
             android:id="@+id/search_news"
             android:layout_width="48dp"
             android:layout_height="48dp"
-            android:background="@drawable/search_bg"
+            android:background="@drawable/search_icon_bg"
             android:clickable="true"
             android:focusable="true"
             android:onClick="@{() -> topHeadlineNews.navigateToSearchScreen()}"
