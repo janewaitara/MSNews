@@ -8,12 +8,11 @@ import com.example.msnews.data.model.Article
 import kotlinx.coroutines.flow.Flow
 
 @Dao
-interface NewsDao {
+interface ArticlesDao {
 
     @Insert(onConflict = OnConflictStrategy.IGNORE)
-    suspend fun insertNews(articles : List<Article>)
+    suspend fun insertNews(articles: List<Article>)
 
-    @Query("SELECT * from news_table")
+    @Query("SELECT * from articles_table")
     fun getNews(): Flow<List<Article>>
-
 }
