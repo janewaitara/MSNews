@@ -8,7 +8,6 @@ import androidx.databinding.BindingAdapter
 import androidx.recyclerview.widget.RecyclerView
 import coil.load
 import com.example.msnews.R
-import com.example.msnews.data.model.ApiResponse
 import com.example.msnews.data.model.Article
 import com.example.msnews.data.model.Resource
 import com.example.msnews.data.utils.ExtensionFunctions.toFormattedDateAndTime
@@ -46,7 +45,7 @@ fun bindRecyclerView(recyclerView: RecyclerView, data: List<Article>?) {
 }
 
 @BindingAdapter("newsStatus")
-fun bindStatusWithShimmer(shimmerFrameLayout: ShimmerFrameLayout, status: Resource<ApiResponse>) {
+fun bindStatusWithShimmer(shimmerFrameLayout: ShimmerFrameLayout, status: Resource<List<Article>>) {
     when (status) {
         is Resource.Success -> {
             shimmerFrameLayout.stopShimmer()

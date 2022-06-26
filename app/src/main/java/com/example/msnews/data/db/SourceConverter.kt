@@ -15,6 +15,7 @@ class SourceConverter {
 
     @TypeConverter
     fun toSource(string: String): Source {
-        return Source(id = null, name = string)
+        val source = string.split(":")
+        return Source(id = source.first(), name = source.last())
     }
 }
