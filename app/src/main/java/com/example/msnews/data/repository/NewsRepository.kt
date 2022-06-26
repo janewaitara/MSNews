@@ -1,7 +1,9 @@
 package com.example.msnews.data.repository
 
 import com.example.msnews.data.model.ApiResponse
+import com.example.msnews.data.model.Article
 import com.example.msnews.data.model.Resource
+import kotlinx.coroutines.flow.Flow
 
 /**
  * This is what is called in the viewModal
@@ -14,4 +16,10 @@ interface NewsRepository {
     // get from Api
     suspend fun getTopHeadlinesFromApi(category: String, language: String): Resource<ApiResponse>
     suspend fun getSearchedNews(searchQuery: String, language: String): Resource<ApiResponse>
+
+    // Local storage functions
+    suspend fun insertNewsToDb(articles: List<Article>)
+    fun getNewsFromDb(): Flow<List<Article>>
+
+    suspend fun getNewsFromApiAndInsertIntoDb(category: String, language: String)
 }
