@@ -214,6 +214,16 @@
             </LinearLayout>
         </com.facebook.shimmer.ShimmerFrameLayout>
 
+        <include
+            android:id="@+id/no_internet_layout"
+            android:layout_height="0dp"
+            android:layout_width="0dp"
+            layout="@layout/no_internet_connection"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/chips_horizontal_scroll" />
+
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

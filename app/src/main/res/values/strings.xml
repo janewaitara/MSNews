@@ -13,5 +13,7 @@
     <string name="news_illustration_content">News illustration</string>
     <string name="sample_article_title">Ukraine war latest: Civilians trapped as last bridge to Severodonetsk destroyed - The Telegraph dsv</string>
     <string name="top_headlines_news">Top Headlines News</string>
+    <string name="no_internet_heading">Oops!!</string>
+    <string name="no_internet_description">There is a connection error. Please check your internet.</string>
     <string name="search_news">Search News</string>
 </resources>
