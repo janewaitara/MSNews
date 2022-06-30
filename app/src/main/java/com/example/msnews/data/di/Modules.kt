@@ -1,6 +1,7 @@
 package com.example.msnews.data.di
 
 import androidx.room.Room
+import com.example.msnews.NewsApplication
 import com.example.msnews.data.api.NewsApiService
 import com.example.msnews.data.db.ArticlesDatabase
 import com.example.msnews.data.repository.NewsRepository
@@ -12,6 +13,7 @@ import com.squareup.moshi.Moshi
 import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
+import org.koin.android.ext.koin.androidApplication
 import org.koin.android.ext.koin.androidContext
 import org.koin.androidx.viewmodel.dsl.viewModel
 import org.koin.dsl.module
@@ -71,7 +73,7 @@ val repositoryModule = module {
 }
 
 val presentationModule = module {
-    viewModel { NewsViewModel(get()) }
+    viewModel { NewsViewModel(androidApplication() as NewsApplication, get()) }
 }
 
 val localModule = module {

@@ -2,6 +2,7 @@ package com.example.msnews.ui.adapter
 
 import android.view.View
 import android.widget.ImageView
+import android.widget.RelativeLayout
 import android.widget.TextView
 import androidx.core.net.toUri
 import androidx.databinding.BindingAdapter
@@ -55,9 +56,17 @@ fun bindStatusWithShimmer(shimmerFrameLayout: ShimmerFrameLayout, status: Resour
             shimmerFrameLayout.visibility = View.VISIBLE
         }
         is Resource.Error -> {
+            shimmerFrameLayout.stopShimmer()
             shimmerFrameLayout.visibility = View.GONE
-            shimmerFrameLayout.visibility = View.VISIBLE
         }
+    }
+}
+
+@BindingAdapter("networkStatus")
+fun bindNetworkWithLayout(relativeLayout: RelativeLayout, networkStatus: Boolean) {
+    when (networkStatus) {
+        true -> relativeLayout.visibility = View.GONE
+        false -> relativeLayout.visibility = View.VISIBLE
     }
 }
 

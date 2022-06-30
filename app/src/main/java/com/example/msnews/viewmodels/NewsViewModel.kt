@@ -22,7 +22,7 @@ class NewsViewModel(
     private val newsRepository: NewsRepository
 ) : AndroidViewModel(app) {
 
-    private val _isNetworkavailable = MutableLiveData<Boolean>()
+    private val _isNetworkAvailable = MutableLiveData<Boolean>()
     private val _status = MutableLiveData<Resource<List<Article>>>()
     private val _listOfTopArticles = MutableLiveData<List<Article>>()
     private val _listOfSearchedArticles = MutableLiveData<List<Article>>()
@@ -33,14 +33,16 @@ class NewsViewModel(
     val listOfSearchedArticles: LiveData<List<Article>> = _listOfSearchedArticles
     val article: LiveData<Article> = _article
     val status: LiveData<Resource<List<Article>>> = _status
-    val isNetworkAvailable: LiveData<Boolean> = _isNetworkavailable
+    val isNetworkAvailable: LiveData<Boolean> = _isNetworkAvailable
     val categoryFilter: LiveData<String> = _categoryFilter
 
     init {
         if (hasNoCategorySet()) {
             // setCategory(getString(R.string.general))
-            setCategory("General")
+            setCategory("Health")
         }
+
+        _isNetworkAvailable.value = true
     }
 
     fun getNewsFromApiAndInsertIntoDb(
@@ -93,13 +95,15 @@ class NewsViewModel(
             _status.value = Resource.Loading()
             try {
                 if (hasInternetConnection()) {
-                    _isNetworkavailable.value = hasInternetConnection()
+                    _isNetworkAvailable.value = hasInternetConnection()
                     val apiResponse = newsRepository.getSearchedNews(searchQuery, language).data!!
                     Log.d("Data fetched for $searchQuery", apiResponse.articles.size.toString())
                     _listOfSearchedArticles.value = apiResponse.articles
                     _status.value = Resource.Success(apiResponse.articles)
                 } else {
-                    _isNetworkavailable.value = hasInternetConnection()
+                    _isNetworkAvailable.value = false
+                    _status.value = Resource.Error("No internet")
+                    _listOfSearchedArticles.value = listOf()
                 }
             } catch (e: Exception) {
                 _status.value = Resource.Error(e.localizedMessage)
