@@ -1,17 +1,28 @@
 package com.example.msnews.viewmodels
 
+import android.content.Context
+import android.net.ConnectivityManager
+import android.net.NetworkCapabilities
+import android.os.Build
 import android.util.Log
 import androidx.lifecycle.*
+import com.example.msnews.NewsApplication
 import com.example.msnews.data.model.Article
 import com.example.msnews.data.model.Resource
 import com.example.msnews.data.repository.NewsRepository
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 
-class NewsViewModel(
-    private val newsRepository: NewsRepository
-) : ViewModel() {
+/**
+ * Used AndroidViewModel to use the application context(lives as long as the app does)
+ * */
 
+class NewsViewModel(
+    app: NewsApplication,
+    private val newsRepository: NewsRepository
+) : AndroidViewModel(app) {
+
+    private val _isNetworkavailable = MutableLiveData<Boolean>()
     private val _status = MutableLiveData<Resource<List<Article>>>()
     private val _listOfTopArticles = MutableLiveData<List<Article>>()
     private val _listOfSearchedArticles = MutableLiveData<List<Article>>()
@@ -22,6 +33,7 @@ class NewsViewModel(
     val listOfSearchedArticles: LiveData<List<Article>> = _listOfSearchedArticles
     val article: LiveData<Article> = _article
     val status: LiveData<Resource<List<Article>>> = _status
+    val isNetworkAvailable: LiveData<Boolean> = _isNetworkavailable
     val categoryFilter: LiveData<String> = _categoryFilter
 
     init {
@@ -80,10 +92,15 @@ class NewsViewModel(
         viewModelScope.launch {
             _status.value = Resource.Loading()
             try {
-                val apiResponse = newsRepository.getSearchedNews(searchQuery, language).data!!
-                Log.d("Data fetched for $searchQuery", apiResponse.articles.size.toString())
-                _listOfSearchedArticles.value = apiResponse.articles
-                _status.value = Resource.Success(apiResponse.articles)
+                if (hasInternetConnection()) {
+                    _isNetworkavailable.value = hasInternetConnection()
+                    val apiResponse = newsRepository.getSearchedNews(searchQuery, language).data!!
+                    Log.d("Data fetched for $searchQuery", apiResponse.articles.size.toString())
+                    _listOfSearchedArticles.value = apiResponse.articles
+                    _status.value = Resource.Success(apiResponse.articles)
+                } else {
+                    _isNetworkavailable.value = hasInternetConnection()
+                }
             } catch (e: Exception) {
                 _status.value = Resource.Error(e.localizedMessage)
                 _listOfSearchedArticles.value = listOf()
@@ -118,5 +135,28 @@ class NewsViewModel(
 
     fun onArticleClicked(article: Article) {
         _article.value = article
+    }
+
+    private fun hasInternetConnection(): Boolean {
+        val connectivityManager: ConnectivityManager =
+            getApplication<NewsApplication>().getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            val activeNetwork = connectivityManager.activeNetwork ?: return false
+            val capabilities =
+                connectivityManager.getNetworkCapabilities(activeNetwork) ?: return false
+
+            return when {
+                capabilities.hasTransport(NetworkCapabilities.TRANSPORT_WIFI) -> true
+                capabilities.hasTransport(NetworkCapabilities.TRANSPORT_CELLULAR) -> true
+                capabilities.hasTransport(NetworkCapabilities.TRANSPORT_ETHERNET) -> true
+                else -> false
+            }
+        } else {
+            @Suppress("DEPRECATION") val activeNetworkInfo =
+                connectivityManager.activeNetworkInfo ?: return false
+            @Suppress("DEPRECATION")
+            return activeNetworkInfo.isConnected
+        }
     }
 }
