@@ -39,7 +39,7 @@ class NewsViewModel(
     init {
         if (hasNoCategorySet()) {
             // setCategory(getString(R.string.general))
-            setCategory("Health")
+            setCategory("General")
         }
 
         _isNetworkAvailable.value = true
@@ -50,8 +50,10 @@ class NewsViewModel(
         language: String
     ) {
         viewModelScope.launch {
-            newsRepository.getNewsFromApiAndInsertIntoDb(category, language)
-            Log.d("Data inserted", " Successful")
+            if (hasInternetConnection()) {
+                newsRepository.getNewsFromApiAndInsertIntoDb(category, language)
+                Log.d("Data inserted", " Successful")
+            }
         }
     }
 
@@ -79,10 +81,18 @@ class NewsViewModel(
         viewModelScope.launch {
             _status.value = Resource.Loading()
             try {
-                val apiResponse = newsRepository.getTopHeadlinesFromApi(category, language).data!!
-                Log.d("Data fetched for $category", apiResponse.articles.size.toString())
-                _listOfTopArticles.value = apiResponse.articles
-                _status.value = Resource.Success(apiResponse.articles!!)
+                if (hasInternetConnection()) {
+                    _isNetworkAvailable.value = hasInternetConnection()
+                    val apiResponse =
+                        newsRepository.getTopHeadlinesFromApi(category, language).data!!
+                    Log.d("Data fetched for $category", apiResponse.articles.size.toString())
+                    _listOfTopArticles.value = apiResponse.articles
+                    _status.value = Resource.Success(apiResponse.articles!!)
+                } else {
+                    _isNetworkAvailable.value = hasInternetConnection()
+                    _status.value = Resource.Error("No internet")
+                    _listOfTopArticles.value = listOf()
+                }
             } catch (e: Exception) {
                 _status.value = Resource.Error(e.localizedMessage)
                 _listOfTopArticles.value = listOf()
@@ -124,7 +134,10 @@ class NewsViewModel(
 
         when (selectedCategory) {
             "General" -> {
-                getNewsFromApiAndInsertIntoDb(selectedCategory, "en")
+                _isNetworkAvailable.value = true
+                if (hasInternetConnection()) {
+                    getNewsFromApiAndInsertIntoDb(selectedCategory, "en")
+                }
                 getTopHeadlinesFromDb()
             }
             else -> {

@@ -6,6 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.SearchView
 import android.widget.Toast
+import androidx.core.view.isVisible
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import com.example.msnews.R
@@ -68,6 +69,8 @@ class SearchNewsFragment : Fragment() {
                 sharedViewModel.onArticleClicked(article)
             }
         )
+
+        binding.noInternetLayout.root.isVisible = false
 
         // Inflate the layout for this fragment
         return binding.root
