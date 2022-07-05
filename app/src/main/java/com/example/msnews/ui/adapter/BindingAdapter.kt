@@ -2,13 +2,13 @@ package com.example.msnews.ui.adapter
 
 import android.view.View
 import android.widget.ImageView
+import android.widget.RelativeLayout
 import android.widget.TextView
 import androidx.core.net.toUri
 import androidx.databinding.BindingAdapter
 import androidx.recyclerview.widget.RecyclerView
 import coil.load
 import com.example.msnews.R
-import com.example.msnews.data.model.ApiResponse
 import com.example.msnews.data.model.Article
 import com.example.msnews.data.model.Resource
 import com.example.msnews.data.utils.ExtensionFunctions.toFormattedDateAndTime
@@ -46,7 +46,7 @@ fun bindRecyclerView(recyclerView: RecyclerView, data: List<Article>?) {
 }
 
 @BindingAdapter("newsStatus")
-fun bindStatusWithShimmer(shimmerFrameLayout: ShimmerFrameLayout, status: Resource<ApiResponse>) {
+fun bindStatusWithShimmer(shimmerFrameLayout: ShimmerFrameLayout, status: Resource<List<Article>>) {
     when (status) {
         is Resource.Success -> {
             shimmerFrameLayout.stopShimmer()
@@ -56,9 +56,17 @@ fun bindStatusWithShimmer(shimmerFrameLayout: ShimmerFrameLayout, status: Resour
             shimmerFrameLayout.visibility = View.VISIBLE
         }
         is Resource.Error -> {
+            shimmerFrameLayout.stopShimmer()
             shimmerFrameLayout.visibility = View.GONE
-            shimmerFrameLayout.visibility = View.VISIBLE
         }
+    }
+}
+
+@BindingAdapter("networkStatus")
+fun bindNetworkWithLayout(relativeLayout: RelativeLayout, networkStatus: Boolean) {
+    when (networkStatus) {
+        true -> relativeLayout.visibility = View.GONE
+        false -> relativeLayout.visibility = View.VISIBLE
     }
 }
 

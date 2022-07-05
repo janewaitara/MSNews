@@ -2,12 +2,30 @@ package com.example.msnews.data.repository
 
 import com.example.msnews.BuildConfig
 import com.example.msnews.data.api.NewsApiService
+import com.example.msnews.data.db.ArticlesDao
 import com.example.msnews.data.model.ApiResponse
+import com.example.msnews.data.model.Article
 import com.example.msnews.data.model.Resource
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.withContext
 import retrofit2.Response
 import java.io.IOException
 
-class NewsRepositoryImpl(private val newsApi: NewsApiService) : NewsRepository {
+class NewsRepositoryImpl(
+    private val newsApi: NewsApiService,
+    private val articlesDao: ArticlesDao
+) : NewsRepository {
+
+    override suspend fun getNewsFromApiAndInsertIntoDb(
+        category: String,
+        language: String
+    ) {
+        withContext(Dispatchers.IO) {
+            val apiResponse = getTopHeadlinesFromApi(category, language).data!!
+            insertNewsToDb(apiResponse.articles)
+        }
+    }
 
     override suspend fun getTopHeadlinesFromApi(
         category: String,
@@ -37,4 +55,12 @@ class NewsRepositoryImpl(private val newsApi: NewsApiService) : NewsRepository {
             apiResult.isSuccessful -> Resource.Success(apiResult.body()!!)
             else -> Resource.Error(apiResult.message())
         }
+
+    override suspend fun insertNewsToDb(articles: List<Article>) {
+        if (articles.isNotEmpty()) {
+            articlesDao.insertNews(articles)
+        }
+    }
+
+    override fun getNewsFromDb(): Flow<List<Article>> = articlesDao.getNews()
 }

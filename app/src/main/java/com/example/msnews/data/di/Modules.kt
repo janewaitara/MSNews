@@ -1,16 +1,23 @@
 package com.example.msnews.data.di
 
+import androidx.room.Room
+import com.example.msnews.NewsApplication
 import com.example.msnews.data.api.NewsApiService
+import com.example.msnews.data.db.ArticlesDatabase
 import com.example.msnews.data.repository.NewsRepository
 import com.example.msnews.data.repository.NewsRepositoryImpl
+import com.example.msnews.data.utils.Constants.DATABASE_NAME
 import com.example.msnews.data.utils.Constants.REST_BASE_URL
 import com.example.msnews.viewmodels.NewsViewModel
 import com.squareup.moshi.Moshi
 import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
+import org.koin.android.ext.koin.androidApplication
+import org.koin.android.ext.koin.androidContext
 import org.koin.androidx.viewmodel.dsl.viewModel
 import org.koin.dsl.module
+import org.koin.dsl.single
 import retrofit2.Retrofit
 import retrofit2.converter.moshi.MoshiConverterFactory
 import java.util.concurrent.TimeUnit
@@ -62,9 +69,19 @@ val apiModule = module {
 }
 
 val repositoryModule = module {
-    single<NewsRepository> { NewsRepositoryImpl(get()) }
+    single<NewsRepository> { NewsRepositoryImpl(get(), get()) }
 }
 
 val presentationModule = module {
-    viewModel { NewsViewModel(get()) }
+    viewModel { NewsViewModel(androidApplication() as NewsApplication, get()) }
+}
+
+val localModule = module {
+    single {
+        Room.databaseBuilder(androidContext(), ArticlesDatabase::class.java, DATABASE_NAME).build()
+    }
+}
+
+val daoModule = module {
+    single { get<ArticlesDatabase>().articlesDao() }
 }

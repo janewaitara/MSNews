@@ -77,8 +77,14 @@ dependencies {
     // Coil
     implementation(Libraries.coil)
 
-    // shimmer Effect
+    // Shimmer Effect
     implementation(Libraries.shimmerEffect)
+
+    // Room
+    implementation(Libraries.roomRuntime)
+    kapt(Libraries.roomCompiler)
+    implementation(Libraries.roomKtx)
+
     // Unit Tests
     testImplementation(TestLibraries.junit4)
     testImplementation(TestLibraries.koinTest)

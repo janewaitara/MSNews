@@ -37,6 +37,15 @@ object Versions {
     // Navigation
     const val navigation = "2.4.2"
 
+    //Coil
+    const val coil = "1.1.1"
+
+    //Shimmer
+    const val shimmerEffect = "0.5.0"
+
+    //Room
+    const val room = "2.4.2"
+
 }
 
 object BuildPlugins {
@@ -82,10 +91,16 @@ object Libraries {
     const val navigationFragment = "androidx.navigation:navigation-fragment-ktx:${Versions.navigation}"
 
     //Coil
-    const val coil = "io.coil-kt:coil:1.1.1"
+    const val coil = "io.coil-kt:coil:${Versions.coil}"
 
     //Shimmer Effect
-    const val shimmerEffect = "com.facebook.shimmer:shimmer:0.5.0"
+    const val shimmerEffect = "com.facebook.shimmer:shimmer:${Versions.shimmerEffect}"
+
+    //Room
+    const val roomRuntime = "androidx.room:room-runtime:${Versions.room}"
+    const val roomCompiler =  "androidx.room:room-compiler:${Versions.room}"
+    const val roomKtx =  "androidx.room:room-ktx:${Versions.room}"
+
 
 }
 
