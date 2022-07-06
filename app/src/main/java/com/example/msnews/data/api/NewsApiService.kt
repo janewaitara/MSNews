@@ -18,5 +18,6 @@ interface NewsApiService {
         @Query("q") searchQuery: String,
         @Query("language") language: String,
         @Query("apiKey") apiKey: String,
+        @Query("page") page: Int
     ): Response<ApiResponse>
 }

@@ -43,7 +43,7 @@ class NewsRepositoryImpl(
         searchQuery: String,
         language: String
     ): Resource<ApiResponse> = try {
-        val apiResult = newsApi.getSearchedNews(searchQuery, language, BuildConfig.API_KEY)
+        val apiResult = newsApi.getSearchedNews(searchQuery, language, BuildConfig.API_KEY, 1)
 
         turnApiResultToResource(apiResult)
     } catch (error: IOException) {
