@@ -19,6 +19,10 @@ class SearchNewsPagingSource(
     private val language: String
 ) : PagingSource<Int, Article>() {
 
+    /**
+     * called when the Paging library needs to reload items for the UI because the data
+     * in its backing PagingSource has changed(situation is called invalidation)
+     * */
     override fun getRefreshKey(state: PagingState<Int, Article>): Int? {
         return state.anchorPosition?.let { position ->
             state.closestPageToPosition(position)?.prevKey?.plus(1) ?: state.closestPageToPosition(
@@ -26,6 +30,11 @@ class SearchNewsPagingSource(
             )?.nextKey?.minus(1)
         }
     }
+
+    /**
+     * called by the Paging library to asynchronously fetch more data
+     * to be displayed as the user scrolls around.
+     * */
     override suspend fun load(params: LoadParams<Int>): LoadResult<Int, Article> {
 
         // Start paging with the STARTING_KEY if this is the first load
