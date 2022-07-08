@@ -6,6 +6,8 @@ import android.widget.RelativeLayout
 import android.widget.TextView
 import androidx.core.net.toUri
 import androidx.databinding.BindingAdapter
+import androidx.lifecycle.Lifecycle
+import androidx.paging.PagingData
 import androidx.recyclerview.widget.RecyclerView
 import coil.load
 import com.example.msnews.R
@@ -13,6 +15,8 @@ import com.example.msnews.data.model.Article
 import com.example.msnews.data.model.Resource
 import com.example.msnews.data.utils.ExtensionFunctions.toFormattedDateAndTime
 import com.facebook.shimmer.ShimmerFrameLayout
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.launch
 
 /**
  *The first method parameter is the type of the target View and
@@ -34,7 +38,7 @@ fun bindImage(imageView: ImageView, imageUrl: String?) {
 }
 
 /**
- * Use a BindingAdapter to initialize the PhotoGridAdapter with the list of MarsPhoto objects.
+ * Use a BindingAdapter to initialize the ArticlesAdapter with the list of article objects.
  * Using a BindingAdapter to set the RecyclerView data causes data binding to automatically
  * observe the LiveData for the list of article objects. Then the binding adapter is called
  * automatically when the articles list changes.
@@ -43,6 +47,17 @@ fun bindImage(imageView: ImageView, imageUrl: String?) {
 fun bindRecyclerView(recyclerView: RecyclerView, data: List<Article>?) {
     val adapter = recyclerView.adapter as ArticlesAdapter
     adapter.submitList(data) // tells the RecyclerView when a new list is available.
+}
+
+@BindingAdapter(value = ["pagingListData", "scope", "lifecycle"], requireAll = true)
+fun bindRecyclerView(recyclerView: RecyclerView, pagingListData: PagingData<Article>?, scope: CoroutineScope, lifecycle: Lifecycle) {
+    val adapter = recyclerView.adapter as PagingArticlesAdapter
+    scope.launch {
+        // Since the paging list is LiveData, we use the non-suspend submitData
+        pagingListData?.let {
+            adapter.submitData(lifecycle, it)
+        }
+    }
 }
 
 @BindingAdapter("newsStatus")

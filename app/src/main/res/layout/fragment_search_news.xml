@@ -10,6 +10,15 @@
             name="viewModel"
             type="com.example.msnews.viewmodels.NewsViewModel" />
 
+        <variable
+            name="coroutineScope"
+            type="kotlinx.coroutines.CoroutineScope" />
+
+        <variable
+            name="lifecycle"
+            type="androidx.lifecycle.Lifecycle" />
+
+
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -42,7 +51,7 @@
             android:queryHint="@string/search_news"
             app:layout_constraintTop_toBottomOf="@+id/search_news_heading" />
 
-        <androidx.recyclerview.widget.RecyclerView
+        <!--<androidx.recyclerview.widget.RecyclerView
             android:id="@+id/news_Recycler_view"
             android:layout_width="0dp"
             android:layout_height="0dp"
@@ -52,6 +61,20 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/search_input_field"
             app:listData="@{viewModel.listOfSearchedArticles}"
+            tools:listitem="@layout/news_view_item" />-->
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/news_Recycler_view"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/search_input_field"
+            app:pagingListData="@{viewModel.listOfPagedSearchedArticles}"
+            app:scope="@{coroutineScope}"
+            app:lifecycle="@{lifecycle}"
             tools:listitem="@layout/news_view_item" />
 
         <com.facebook.shimmer.ShimmerFrameLayout

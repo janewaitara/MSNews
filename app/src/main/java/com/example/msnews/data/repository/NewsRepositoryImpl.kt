@@ -1,10 +1,8 @@
 package com.example.msnews.data.repository
 
-import androidx.lifecycle.LiveData
 import androidx.paging.Pager
 import androidx.paging.PagingConfig
 import androidx.paging.PagingData
-import androidx.paging.liveData
 import com.example.msnews.BuildConfig
 import com.example.msnews.data.api.NewsApiService
 import com.example.msnews.data.db.ArticlesDao
@@ -66,13 +64,13 @@ class NewsRepositoryImpl(
     override suspend fun getPagedSearchedNews(
         searchQuery: String,
         language: String
-    ): LiveData<PagingData<Article>> = Pager(
+    ): Flow<PagingData<Article>> = Pager(
         config = PagingConfig(
             pageSize = NETWORK_SEARCH_PAGE_SIZE,
             enablePlaceholders = false
         ),
         pagingSourceFactory = { SearchNewsPagingSource(newsApi, searchQuery, language) }
-    ).liveData
+    ).flow
 
     private fun turnApiResultToResource(apiResult: Response<ApiResponse>): Resource<ApiResponse> =
         when {

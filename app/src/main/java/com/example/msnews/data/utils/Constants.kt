@@ -6,5 +6,5 @@ object Constants {
 
     // Initial Key used for loading
     const val NEWS_STARTING_PAGE_NUMBER = 1
-    const val NETWORK_SEARCH_PAGE_SIZE = 100
+    const val NETWORK_SEARCH_PAGE_SIZE = 30
 }

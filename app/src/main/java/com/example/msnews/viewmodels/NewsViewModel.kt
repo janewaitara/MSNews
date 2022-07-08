@@ -13,6 +13,7 @@ import com.example.msnews.data.model.Article
 import com.example.msnews.data.model.Resource
 import com.example.msnews.data.repository.NewsRepository
 import kotlinx.coroutines.flow.collect
+import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 
 /**
@@ -137,10 +138,17 @@ class NewsViewModel(
                         // to maintain paging state through configuration or navigation changes,
                         // we use the cachedIn()
                         .cachedIn(viewModelScope)
-
-                    Log.d("Paged Data fetched for $searchQuery", apiResponse.value.toString())
-                    _listOfPagedSearchedArticles.value = apiResponse.value
-                    _status.value = Resource.Success(listOf())
+                    Log.d("Loading ", status.value.toString())
+                    /*  Log.d("Paged Data fetched for $searchQuery", apiResponse.value.toString())
+                      _listOfPagedSearchedArticles.value = apiResponse.value
+                      _status.value = Resource.Success(listOf())
+                      */
+                    apiResponse.collectLatest { pagedArticles ->
+                        Log.d("Paged Data fetched for $searchQuery", pagedArticles.toString())
+                        _listOfPagedSearchedArticles.value = pagedArticles
+                        _status.value = Resource.Success(listOf())
+                        Log.d("Loading ", status.value.toString())
+                    }
                 } else {
                     _isNetworkAvailable.value = false
                     _status.value = Resource.Error("No internet")

@@ -1,6 +1,5 @@
 package com.example.msnews.data.repository
 
-import androidx.lifecycle.LiveData
 import androidx.paging.PagingData
 import com.example.msnews.data.model.ApiResponse
 import com.example.msnews.data.model.Article
@@ -18,7 +17,7 @@ interface NewsRepository {
     // get from Api
     suspend fun getTopHeadlinesFromApi(category: String, language: String): Resource<ApiResponse>
     suspend fun getSearchedNews(searchQuery: String, language: String): Resource<ApiResponse>
-    suspend fun getPagedSearchedNews(searchQuery: String, language: String): LiveData<PagingData<Article>>
+    suspend fun getPagedSearchedNews(searchQuery: String, language: String): Flow<PagingData<Article>>
 
     // Local storage functions
     suspend fun insertNewsToDb(articles: List<Article>)
