@@ -1,11 +1,15 @@
 package com.example.msnews.data.repository
 
+import androidx.paging.Pager
+import androidx.paging.PagingConfig
+import androidx.paging.PagingData
 import com.example.msnews.BuildConfig
 import com.example.msnews.data.api.NewsApiService
 import com.example.msnews.data.db.ArticlesDao
 import com.example.msnews.data.model.ApiResponse
 import com.example.msnews.data.model.Article
 import com.example.msnews.data.model.Resource
+import com.example.msnews.data.utils.Constants.NETWORK_SEARCH_PAGE_SIZE
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.withContext
@@ -39,16 +43,34 @@ class NewsRepositoryImpl(
         Resource.Error(error.localizedMessage)
     }
 
+    // Used without Paging
     override suspend fun getSearchedNews(
         searchQuery: String,
         language: String
     ): Resource<ApiResponse> = try {
-        val apiResult = newsApi.getSearchedNews(searchQuery, language, BuildConfig.API_KEY)
+        val apiResult = newsApi.getSearchedNews(searchQuery, language, BuildConfig.API_KEY, 1)
 
         turnApiResultToResource(apiResult)
     } catch (error: IOException) {
         Resource.Error(error.localizedMessage)
     }
+
+    // Used With Paging
+    /**
+     * pagingSourceFactory provides an instance of the SearchedNewsPagingSource and its lambda
+     * should always return a brand new PagingSource when invoked as PagingSource
+     * instances are not reusable.
+     * */
+    override suspend fun getPagedSearchedNews(
+        searchQuery: String,
+        language: String
+    ): Flow<PagingData<Article>> = Pager(
+        config = PagingConfig(
+            pageSize = NETWORK_SEARCH_PAGE_SIZE,
+            enablePlaceholders = false
+        ),
+        pagingSourceFactory = { SearchNewsPagingSource(newsApi, searchQuery, language) }
+    ).flow
 
     private fun turnApiResultToResource(apiResult: Response<ApiResponse>): Resource<ApiResponse> =
         when {

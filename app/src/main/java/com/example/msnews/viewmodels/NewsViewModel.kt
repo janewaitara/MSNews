@@ -6,11 +6,14 @@ import android.net.NetworkCapabilities
 import android.os.Build
 import android.util.Log
 import androidx.lifecycle.*
+import androidx.paging.PagingData
+import androidx.paging.cachedIn
 import com.example.msnews.NewsApplication
 import com.example.msnews.data.model.Article
 import com.example.msnews.data.model.Resource
 import com.example.msnews.data.repository.NewsRepository
 import kotlinx.coroutines.flow.collect
+import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 
 /**
@@ -26,11 +29,14 @@ class NewsViewModel(
     private val _status = MutableLiveData<Resource<List<Article>>>()
     private val _listOfTopArticles = MutableLiveData<List<Article>>()
     private val _listOfSearchedArticles = MutableLiveData<List<Article>>()
+    private val _listOfPagedSearchedArticles = MutableLiveData<PagingData<Article>>()
+
     private val _article = MutableLiveData<Article>()
     private var _categoryFilter = MutableLiveData<String>()
 
     val listOfTopArticles: LiveData<List<Article>> = _listOfTopArticles
     val listOfSearchedArticles: LiveData<List<Article>> = _listOfSearchedArticles
+    val listOfPagedSearchedArticles: LiveData<PagingData<Article>> = _listOfPagedSearchedArticles
     val article: LiveData<Article> = _article
     val status: LiveData<Resource<List<Article>>> = _status
     val isNetworkAvailable: LiveData<Boolean> = _isNetworkAvailable
@@ -110,6 +116,39 @@ class NewsViewModel(
                     Log.d("Data fetched for $searchQuery", apiResponse.articles.size.toString())
                     _listOfSearchedArticles.value = apiResponse.articles
                     _status.value = Resource.Success(apiResponse.articles)
+                } else {
+                    _isNetworkAvailable.value = false
+                    _status.value = Resource.Error("No internet")
+                    _listOfSearchedArticles.value = listOf()
+                }
+            } catch (e: Exception) {
+                _status.value = Resource.Error(e.localizedMessage)
+                _listOfSearchedArticles.value = listOf()
+            }
+        }
+    }
+
+    fun getPagedSearchedNews(searchQuery: String, language: String) {
+        viewModelScope.launch {
+            _status.value = Resource.Loading()
+            try {
+                if (hasInternetConnection()) {
+                    _isNetworkAvailable.value = hasInternetConnection()
+                    val apiResponse = newsRepository.getPagedSearchedNews(searchQuery, language)
+                        // to maintain paging state through configuration or navigation changes,
+                        // we use the cachedIn()
+                        .cachedIn(viewModelScope)
+                    Log.d("Loading ", status.value.toString())
+                    /*  Log.d("Paged Data fetched for $searchQuery", apiResponse.value.toString())
+                      _listOfPagedSearchedArticles.value = apiResponse.value
+                      _status.value = Resource.Success(listOf())
+                      */
+                    apiResponse.collectLatest { pagedArticles ->
+                        Log.d("Paged Data fetched for $searchQuery", pagedArticles.toString())
+                        _listOfPagedSearchedArticles.value = pagedArticles
+                        _status.value = Resource.Success(listOf())
+                        Log.d("Loading ", status.value.toString())
+                    }
                 } else {
                     _isNetworkAvailable.value = false
                     _status.value = Resource.Error("No internet")

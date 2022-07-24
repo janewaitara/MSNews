@@ -85,6 +85,9 @@ dependencies {
     kapt(Libraries.roomCompiler)
     implementation(Libraries.roomKtx)
 
+    // Paging
+    implementation(Libraries.pagingRuntime)
+
     // Unit Tests
     testImplementation(TestLibraries.junit4)
     testImplementation(TestLibraries.koinTest)
