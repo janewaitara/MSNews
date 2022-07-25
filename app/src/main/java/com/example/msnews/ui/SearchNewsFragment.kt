@@ -11,6 +11,7 @@ import androidx.core.view.isVisible
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
+import androidx.paging.LoadState
 import androidx.paging.PagingData
 import com.example.msnews.R
 import com.example.msnews.data.model.Article
@@ -19,6 +20,7 @@ import com.example.msnews.ui.adapter.ArticleListener
 import com.example.msnews.ui.adapter.ArticleLoadStateAdapter
 import com.example.msnews.ui.adapter.PagingArticlesAdapter
 import com.example.msnews.viewmodels.NewsViewModel
+import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 import org.koin.androidx.viewmodel.ext.android.sharedViewModel
 
@@ -66,8 +68,11 @@ class SearchNewsFragment : Fragment() {
 
             override fun onQueryTextChange(query: String?): Boolean {
                 query?.let {
-                    if (it.isNotBlank())
+                    if (it.isNotBlank()) {
                         searchNews(it)
+                    } else {
+                        binding.newsRecyclerView.isVisible = false
+                    }
                 }
                 return true
             }
@@ -119,7 +124,43 @@ class SearchNewsFragment : Fragment() {
         binding.newsRecyclerView.adapter = articlesAdapter
         Log.d("Recycler Items", "${articlesAdapter.itemCount}")
 
+        /**
+         * The problem here:
+         * The expectations are:
+         * 1. when the loadState is Loading, the shimmerFrame is visible but in this case it is not
+         * 2. whenever I make too many requests to the Api, beyond the limitation, the retry btn
+         * becomes visible. Instead, it crashes with the error: {"status":"error",
+         * "code":"rateLimited","message":"You have made too many requests recently.
+         * Developer accounts are limited to 100 requests over a 24 hour period (50 requests
+         * available every 12 hours). Please upgrade to a paid plan if you need more requests."}
+         *
+         * solved the crashing by adding the elvis operator on line 57 of the pagingSource but
+         * this makes the pagingListData become empty meaning the adapter itemCount is 0
+         * satisfying the isListEmpty condition below which in my opinion should not be an
+         * empty List state(No results) but an error. How best can I handle this?
+         *
+         * The emptyList showing works which is confusing because why are the others not working.
+         * */
+        // To know when the list was loaded we will use the PagingDataAdapter.loadStateFlow property.
+        // This Flow emits every time there's a change in the load state via a CombinedLoadStates object.
+        lifecycleScope.launch {
+            articlesAdapter.loadStateFlow.collect { loadState ->
+                val isListEmpty =
+                    loadState.refresh is LoadState.NotLoading && articlesAdapter.itemCount == 0
+                // show empty list
+                binding.emptyList.isVisible = isListEmpty
+                // Show shimmer effect during initial load or refresh.
+                binding.shimmerFrameLayout.isVisible = loadState.source.refresh is LoadState.Loading
+                // Only show the list if refresh succeeds.
+                binding.newsRecyclerView.isVisible = !isListEmpty
+                // Show the retry state if initial load or refresh fails.
+                binding.btnInitialRetry.isVisible = loadState.source.refresh is LoadState.Error
+            }
+        }
+
         binding.noInternetLayout.root.isVisible = false
+        binding.btnInitialRetry.isVisible = false
+        binding.emptyList.isVisible = false
 
         // Inflate the layout for this fragment
         return binding.root

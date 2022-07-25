@@ -129,5 +129,31 @@
             app:layout_constraintTop_toBottomOf="@id/search_input_field"
             bind:passedViewModel="@{viewModel}" />
 
+        <TextView
+            android:id="@+id/emptyList"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:text="@string/empty_List"
+            style="@style/Widget.NewsApp.BodyBoldText"
+            android:visibility="gone"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/search_input_field"/>
+
+        <Button
+            android:id="@+id/btnInitialRetry"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:text="@string/text_retry"
+            style="@style/Widget.NewsApp.Button"
+            android:layout_marginTop="6dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/search_input_field"/>
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

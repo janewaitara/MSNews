@@ -52,7 +52,9 @@ class SearchNewsPagingSource(
              * if we didn't have our own Resource
              * */
             val apiResultAsResource = turnApiResultToResource(apiResult)
-            val searchedArticleListing = apiResultAsResource.data!!.articles
+
+            // Added the empty list to stop the crashing when the api requests have been exceeded
+            val searchedArticleListing = apiResultAsResource.data?.articles ?: listOf()
 
             val nextKey = if (searchedArticleListing.isEmpty()) {
                 null
