@@ -57,6 +57,8 @@ class SearchNewsPagingSource(
             val nextKey = if (searchedArticleListing.isEmpty()) {
                 null
             } else {
+                // initial load size = 3 * NETWORK_SEARCH_PAGE_SIZE
+                // ensure we're not requesting duplicating items, at the 2nd request
                 page + (params.loadSize / NETWORK_SEARCH_PAGE_SIZE)
             }
 
