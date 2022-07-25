@@ -10,9 +10,11 @@
         <entry key="app/src/main/res/drawable/search_bg.xml" value="0.1385" />
         <entry key="app/src/main/res/drawable/search_field_bg.xml" value="0.1" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.2947916666666667" />
-        <entry key="app/src/main/res/layout/fragment_search_news.xml" value="0.25" />
+        <entry key="app/src/main/res/layout/fragment_search_news.xml" value="0.1" />
         <entry key="app/src/main/res/layout/fragment_top_headline_news.xml" value="0.1" />
         <entry key="app/src/main/res/layout/fragment_top_headlines.xml" value="0.28072916666666664" />
+        <entry key="app/src/main/res/layout/item_loading.xml" value="0.1" />
+        <entry key="app/src/main/res/layout/item_loading_state.xml" value="0.25" />
         <entry key="app/src/main/res/layout/loading_shimmer_effect.xml" value="0.291213768115942" />
         <entry key="app/src/main/res/layout/news_view_item.xml" value="0.2981651376146789" />
         <entry key="app/src/main/res/layout/no_internet_connection.xml" value="0.14285714285714285" />

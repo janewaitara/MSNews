@@ -26,8 +26,8 @@ class NewsRepositoryImpl(
         language: String
     ) {
         withContext(Dispatchers.IO) {
-            val apiResponse = getTopHeadlinesFromApi(category, language).data!!
-            insertNewsToDb(apiResponse.articles)
+            val apiResponse = getTopHeadlinesFromApi(category, language).data
+            insertNewsToDb(apiResponse?.articles ?: listOf())
         }
     }
 
