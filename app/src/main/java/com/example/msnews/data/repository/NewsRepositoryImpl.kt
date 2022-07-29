@@ -27,6 +27,7 @@ class NewsRepositoryImpl(
     ) {
         withContext(Dispatchers.IO) {
             val apiResponse = getTopHeadlinesFromApi(category, language).data
+            // Added the empty list to stop the crashing when the api requests have been exceeded
             insertNewsToDb(apiResponse?.articles ?: listOf())
         }
     }
@@ -48,7 +49,7 @@ class NewsRepositoryImpl(
         searchQuery: String,
         language: String
     ): Resource<ApiResponse> = try {
-        val apiResult = newsApi.getSearchedNews(searchQuery, language, BuildConfig.API_KEY, 1)
+        val apiResult = newsApi.getSearchedNews(searchQuery, language, BuildConfig.API_KEY, 10, 1)
 
         turnApiResultToResource(apiResult)
     } catch (error: IOException) {
