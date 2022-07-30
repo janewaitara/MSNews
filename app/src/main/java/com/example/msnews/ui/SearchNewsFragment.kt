@@ -10,6 +10,7 @@ import android.widget.Toast
 import androidx.core.view.isVisible
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.Observer
 import androidx.lifecycle.lifecycleScope
 import androidx.paging.LoadState
 import androidx.paging.PagingData
@@ -36,10 +37,6 @@ class SearchNewsFragment : Fragment() {
     private lateinit var binding: FragmentSearchNewsBinding
     private lateinit var articlesAdapter: PagingArticlesAdapter
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-    }
-
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -56,6 +53,8 @@ class SearchNewsFragment : Fragment() {
 
         binding.coroutineScope = viewLifecycleOwner.lifecycleScope
         binding.lifecycle = lifecycle
+
+        observePagingData()
 
         binding.searchInputField.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
             override fun onQueryTextSubmit(query: String?): Boolean {
@@ -78,18 +77,18 @@ class SearchNewsFragment : Fragment() {
             }
         })
 
-        // binding the recyclerview to the adapter
-        /*binding.newsRecyclerView.adapter = ArticlesAdapter(
-            ArticleListener { article ->
-                sharedViewModel.onArticleClicked(article)
-            }
-        ) */
-       /* binding.newsRecyclerView.adapter = PagingArticlesAdapter(
-            ArticleListener { article ->
-                sharedViewModel.onArticleClicked(article)
-            }
-        )*/
+        // setUpRecyclerViewWithDataBinding()
 
+        binding.noInternetLayout.root.isVisible = false
+        binding.btnInitialRetry.isVisible = false
+        binding.shimmerFrameLayout.isVisible = false
+        binding.emptyList.isVisible = false
+
+        // Inflate the layout for this fragment
+        return binding.root
+    }
+
+    private fun setUpRecyclerViewWithDataBinding() {
         articlesAdapter = PagingArticlesAdapter(
             ArticleListener { article ->
                 sharedViewModel.onArticleClicked(article)
@@ -151,23 +150,20 @@ class SearchNewsFragment : Fragment() {
                 binding.emptyList.isVisible = isListEmpty
                 // Show shimmer effect during initial load or refresh.
                 binding.shimmerFrameLayout.isVisible = loadState.source.refresh is LoadState.Loading
+
+                Log.e("Load State", "$loadState")
+                Log.d("Recycler Items", "${articlesAdapter.itemCount}")
+
                 // Only show the list if refresh succeeds.
                 binding.newsRecyclerView.isVisible = !isListEmpty
                 // Show the retry state if initial load or refresh fails.
                 binding.btnInitialRetry.isVisible = loadState.source.refresh is LoadState.Error
             }
         }
-
-        binding.noInternetLayout.root.isVisible = false
-        binding.btnInitialRetry.isVisible = false
-        binding.emptyList.isVisible = false
-
-        // Inflate the layout for this fragment
-        return binding.root
     }
 
     private fun searchNews(searchQuery: String) {
-        // sharedViewModel.getSearchedNews(searchQuery, "en")
+
         sharedViewModel.getPagedSearchedNews(searchQuery, "en")
 
         /*sharedViewModel.listOfPagedSearchedArticles.observe(viewLifecycleOwner, Observer {
@@ -177,6 +173,15 @@ class SearchNewsFragment : Fragment() {
         Toast.makeText(context, "Searched", Toast.LENGTH_LONG).show()
     }
 
+    private fun observePagingData() {
+        sharedViewModel.listOfPagedSearchedArticles.observe(
+            viewLifecycleOwner,
+            Observer {
+                setUpRecyclerView(it)
+            }
+        )
+    }
+
     private fun setUpRecyclerView(pagingListData: PagingData<Article>) {
         articlesAdapter = PagingArticlesAdapter(
             ArticleListener { article ->
@@ -184,6 +189,32 @@ class SearchNewsFragment : Fragment() {
             }
         )
         binding.newsRecyclerView.adapter = articlesAdapter
+
+        binding.newsRecyclerView.adapter = articlesAdapter.withLoadStateHeaderAndFooter(
+            header = ArticleLoadStateAdapter { articlesAdapter.retry() },
+            footer = ArticleLoadStateAdapter { articlesAdapter.retry() },
+        )
+
+        lifecycleScope.launch {
+            articlesAdapter.loadStateFlow.collect { loadState ->
+                val isListEmpty =
+                    loadState.refresh is LoadState.NotLoading && articlesAdapter.itemCount == 0
+                val isLoading = loadState.source.refresh is LoadState.Loading
+                // show empty list
+                binding.emptyList.isVisible = isListEmpty
+                // Show shimmer effect during initial load or refresh.
+                binding.shimmerFrameLayout.isVisible = isLoading
+                // Log.e("Load State", "$loadState")
+                Log.e("Load State: Loading", "$isLoading")
+                Log.d("Recycler Items", "${articlesAdapter.itemCount}")
+
+                // Only show the list if refresh succeeds.
+                binding.newsRecyclerView.isVisible = !isListEmpty
+                // Show the retry state if initial load or refresh fails.
+                binding.btnInitialRetry.isVisible = loadState.source.refresh is LoadState.Error
+            }
+        }
+
         lifecycleScope.launch {
             // Since the paging list is LiveData, we use the non-suspend submitData
             articlesAdapter.submitData(lifecycle, pagingListData)

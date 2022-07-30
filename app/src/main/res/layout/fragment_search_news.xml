@@ -72,10 +72,11 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/search_input_field"
-            app:pagingListData="@{viewModel.listOfPagedSearchedArticles}"
-            app:scope="@{coroutineScope}"
-            app:lifecycle="@{lifecycle}"
             tools:listitem="@layout/news_view_item" />
+
+       <!-- app:pagingListData="@{viewModel.listOfPagedSearchedArticles}"
+        app:scope="@{coroutineScope}"
+        app:lifecycle="@{lifecycle}"-->
 
         <com.facebook.shimmer.ShimmerFrameLayout
             android:id="@+id/shimmer_frame_layout"
