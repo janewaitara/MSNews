@@ -1,6 +1,7 @@
 package com.example.msnews.data.repository
 
 import androidx.paging.PagingSource
+import androidx.paging.PagingState
 import com.example.msnews.BuildConfig
 import com.example.msnews.data.api.NewsApiService
 import com.example.msnews.data.model.Article
@@ -50,6 +51,14 @@ class OtherTopHeadlinePagingSource(
             return LoadResult.Error(exception)
         } catch (exception: HttpException) {
             return LoadResult.Error(exception)
+        }
+    }
+
+    override fun getRefreshKey(state: PagingState<Int, Article>): Int? {
+        return state.anchorPosition?.let { position ->
+            state.closestPageToPosition(position)?.prevKey?.plus(1) ?: state.closestPageToPosition(
+                position
+            )?.nextKey?.minus(1)
         }
     }
 }

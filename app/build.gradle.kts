@@ -84,6 +84,7 @@ dependencies {
     implementation(Libraries.roomRuntime)
     kapt(Libraries.roomCompiler)
     implementation(Libraries.roomKtx)
+    implementation(Libraries.roomPaging)
 
     // Paging
     implementation(Libraries.pagingRuntime)
