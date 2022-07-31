@@ -19,7 +19,7 @@ class GeneralTopHeadlinesRemoteMediator(
     private val newsApiService: NewsApiService,
     private val articlesDatabase: ArticlesDatabase,
     private val category: String,
-    private val language: String
+    private val language: String,
 ) : RemoteMediator<Int, Article>() {
 
     /**
@@ -37,17 +37,28 @@ class GeneralTopHeadlinesRemoteMediator(
 
         // the page we need to load from the network, based on the LoadType.
         val page = when (loadType) {
+            // when it's the first time we're loading data, or when PagingDataAdapter.refresh() is called
             LoadType.REFRESH -> {
-                // TODO
-                0
+                val articlesKeys = getRemoteKeyClosestToCurrentPosition(state)
+                articlesKeys?.nextKey?.minus(1) ?: NEWS_STARTING_PAGE_NUMBER
             }
+            // when we need to load data at the beginning of the currently loaded data set
             LoadType.PREPEND -> {
-                // TODO
-                0
+                val articlesKeys = getRemoteKeyForFirstItem(state)
+                val prevKey = articlesKeys?.prevKey
+                if (prevKey == null) {
+                    return MediatorResult.Success(endOfPaginationReached = articlesKeys != null)
+                }
+                prevKey
             }
+            // When we need to load data at the end of the currently loaded data set, the load parameter is LoadType.APPEND
             LoadType.APPEND -> {
-                // TODO
-                0
+                val articlesKeys = getRemoteKeyForLastItem(state)
+                val nextKey = articlesKeys?.nextKey
+                if (nextKey == null) {
+                    return MediatorResult.Success(endOfPaginationReached = articlesKeys != null)
+                }
+                nextKey
             }
         }
 
@@ -56,7 +67,7 @@ class GeneralTopHeadlinesRemoteMediator(
                 category = category,
                 language = language,
                 apiKey = BuildConfig.API_KEY,
-                page = 1
+                page = page
             )
 
             val articles = apiResult.body()?.articles
@@ -87,6 +98,38 @@ class GeneralTopHeadlinesRemoteMediator(
             return MediatorResult.Error(exception)
         } catch (exception: HttpException) {
             return MediatorResult.Error(exception)
+        }
+    }
+
+    private suspend fun getRemoteKeyForLastItem(state: PagingState<Int, Article>): ArticlesKeys? {
+        // Get the last page that was retrieved, that contained items.
+        // From that last page, get the last item
+        return state.pages.lastOrNull() { it.data.isNotEmpty() }?.data?.lastOrNull()
+            ?.let { article ->
+                // Get the remote keys of the last item retrieved
+                articlesDatabase.articlesKeysDao().getArticlesKeysByUrl(article.url)
+            }
+    }
+
+    private suspend fun getRemoteKeyForFirstItem(state: PagingState<Int, Article>): ArticlesKeys? {
+        // Get the first page that was retrieved, that contained items.
+        // From that first page, get the first item
+        return state.pages.firstOrNull { it.data.isNotEmpty() }?.data?.firstOrNull()
+            ?.let { article ->
+                // Get the remote keys of the first items retrieved
+                articlesDatabase.articlesKeysDao().getArticlesKeysByUrl(article.url)
+            }
+    }
+
+    private suspend fun getRemoteKeyClosestToCurrentPosition(
+        state: PagingState<Int, Article>
+    ): ArticlesKeys? {
+        // The paging library is trying to load data after the anchor position
+        // Get the item closest to the anchor position
+        return state.anchorPosition?.let { position ->
+            state.closestItemToPosition(position)?.url?.let { articleUrl ->
+                articlesDatabase.articlesKeysDao().getArticlesKeysByUrl(articleUrl)
+            }
         }
     }
 }
