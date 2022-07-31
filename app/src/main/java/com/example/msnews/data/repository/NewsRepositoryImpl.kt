@@ -1,11 +1,13 @@
 package com.example.msnews.data.repository
 
+import androidx.paging.ExperimentalPagingApi
 import androidx.paging.Pager
 import androidx.paging.PagingConfig
 import androidx.paging.PagingData
 import com.example.msnews.BuildConfig
 import com.example.msnews.data.api.NewsApiService
 import com.example.msnews.data.db.ArticlesDao
+import com.example.msnews.data.db.ArticlesDatabase
 import com.example.msnews.data.model.ApiResponse
 import com.example.msnews.data.model.Article
 import com.example.msnews.data.model.Resource
@@ -18,12 +20,13 @@ import java.io.IOException
 
 class NewsRepositoryImpl(
     private val newsApi: NewsApiService,
-    private val articlesDao: ArticlesDao
+    private val articlesDao: ArticlesDao,
+    private val articlesDatabase: ArticlesDatabase,
 ) : NewsRepository {
 
     override suspend fun getNewsFromApiAndInsertIntoDb(
         category: String,
-        language: String
+        language: String,
     ) {
         withContext(Dispatchers.IO) {
             val apiResponse = getTopHeadlinesFromApi(category, language).data
@@ -34,7 +37,7 @@ class NewsRepositoryImpl(
 
     override suspend fun getTopHeadlinesFromApi(
         category: String,
-        language: String
+        language: String,
     ): Resource<ApiResponse> = try {
 
         val apiResult = newsApi.getTopHeadlines(category, language, BuildConfig.API_KEY)
@@ -44,10 +47,33 @@ class NewsRepositoryImpl(
         Resource.Error(error.localizedMessage)
     }
 
+    override fun getGeneralTopHeadlinesFromDB(
+        category: String,
+        language: String,
+    ): Flow<PagingData<Article>> {
+
+        val pagingSource = { articlesDatabase.articlesDao().getNews() }
+
+        @OptIn(ExperimentalPagingApi::class)
+        return Pager(
+            config = PagingConfig(
+                pageSize = NETWORK_SEARCH_PAGE_SIZE,
+                enablePlaceholders = false
+            ),
+            remoteMediator = GeneralTopHeadlinesRemoteMediator(
+                newsApiService = newsApi,
+                articlesDatabase = articlesDatabase,
+                category = category,
+                language = language
+            ),
+            pagingSourceFactory = pagingSource
+        ).flow
+    }
+
     // Used without Paging
     override suspend fun getSearchedNews(
         searchQuery: String,
-        language: String
+        language: String,
     ): Resource<ApiResponse> = try {
         val apiResult = newsApi.getSearchedNews(searchQuery, language, BuildConfig.API_KEY, 10, 1)
 
@@ -64,7 +90,7 @@ class NewsRepositoryImpl(
      * */
     override suspend fun getPagedSearchedNews(
         searchQuery: String,
-        language: String
+        language: String,
     ): Flow<PagingData<Article>> = Pager(
         config = PagingConfig(
             pageSize = NETWORK_SEARCH_PAGE_SIZE,

@@ -23,5 +23,7 @@ interface NewsRepository {
     suspend fun insertNewsToDb(articles: List<Article>)
     fun getNewsFromDb(): Flow<List<Article>>
 
+    fun getGeneralTopHeadlinesFromDB(category: String, language: String): Flow<PagingData<Article>>
+
     suspend fun getNewsFromApiAndInsertIntoDb(category: String, language: String)
 }
