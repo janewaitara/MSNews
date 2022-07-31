@@ -15,4 +15,7 @@ interface ArticlesDao {
 
     @Query("SELECT * from articles_table")
     fun getNews(): Flow<List<Article>>
+
+    @Query("DELETE FROM articles_table")
+    suspend fun clearNews()
 }
