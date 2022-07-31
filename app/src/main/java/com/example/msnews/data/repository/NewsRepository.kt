@@ -18,6 +18,7 @@ interface NewsRepository {
     suspend fun getTopHeadlinesFromApi(category: String, language: String): Resource<ApiResponse>
     suspend fun getSearchedNews(searchQuery: String, language: String): Resource<ApiResponse>
     suspend fun getPagedSearchedNews(searchQuery: String, language: String): Flow<PagingData<Article>>
+    fun getOtherTopHeadlinesFromApi(category: String, language: String): Flow<PagingData<Article>>
 
     // Local storage functions
     suspend fun insertNewsToDb(articles: List<Article>)

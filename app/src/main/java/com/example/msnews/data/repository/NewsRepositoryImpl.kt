@@ -70,6 +70,17 @@ class NewsRepositoryImpl(
         ).flow
     }
 
+    override fun getOtherTopHeadlinesFromApi(
+        category: String,
+        language: String,
+    ): Flow<PagingData<Article>> = Pager(
+        config = PagingConfig(
+            pageSize = NETWORK_SEARCH_PAGE_SIZE,
+            enablePlaceholders = false
+        ),
+        pagingSourceFactory = { OtherTopHeadlinePagingSource(newsApi, category, language) }
+    ).flow
+
     // Used without Paging
     override suspend fun getSearchedNews(
         searchQuery: String,
