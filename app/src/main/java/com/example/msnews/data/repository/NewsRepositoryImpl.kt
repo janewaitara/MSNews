@@ -12,8 +12,10 @@ import com.example.msnews.data.model.ApiResponse
 import com.example.msnews.data.model.Article
 import com.example.msnews.data.model.Resource
 import com.example.msnews.data.utils.Constants.NETWORK_SEARCH_PAGE_SIZE
+import com.example.msnews.data.utils.Constants.NEWS_STARTING_PAGE_NUMBER
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.withContext
 import retrofit2.Response
 import java.io.IOException
@@ -40,7 +42,12 @@ class NewsRepositoryImpl(
         language: String,
     ): Resource<ApiResponse> = try {
 
-        val apiResult = newsApi.getTopHeadlines(category, language, BuildConfig.API_KEY)
+        val apiResult = newsApi.getTopHeadlines(
+            category = category,
+            language = language,
+            apiKey = BuildConfig.API_KEY,
+            page = NEWS_STARTING_PAGE_NUMBER
+        )
 
         turnApiResultToResource(apiResult)
     } catch (error: Throwable) {
@@ -122,5 +129,5 @@ class NewsRepositoryImpl(
         }
     }
 
-    override fun getNewsFromDb(): Flow<List<Article>> = articlesDao.getNews()
+    override fun getNewsFromDb(): Flow<List<Article>> = MutableStateFlow(listOf())
 }

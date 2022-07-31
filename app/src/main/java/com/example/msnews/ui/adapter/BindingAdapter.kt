@@ -43,11 +43,11 @@ fun bindImage(imageView: ImageView, imageUrl: String?) {
  * observe the LiveData for the list of article objects. Then the binding adapter is called
  * automatically when the articles list changes.
  * */
-@BindingAdapter("listData")
+/*@BindingAdapter("listData")
 fun bindRecyclerView(recyclerView: RecyclerView, data: List<Article>?) {
     val adapter = recyclerView.adapter as ArticlesAdapter
     adapter.submitList(data) // tells the RecyclerView when a new list is available.
-}
+}*/
 
 @BindingAdapter(value = ["pagingListData", "scope", "lifecycle"], requireAll = true)
 fun bindRecyclerView(recyclerView: RecyclerView, pagingListData: PagingData<Article>?, scope: CoroutineScope, lifecycle: Lifecycle) {
