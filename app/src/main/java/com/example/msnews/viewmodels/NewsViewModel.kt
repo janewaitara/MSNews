@@ -22,7 +22,7 @@ import kotlinx.coroutines.launch
 
 class NewsViewModel(
     app: NewsApplication,
-    private val newsRepository: NewsRepository
+    private val newsRepository: NewsRepository,
 ) : AndroidViewModel(app) {
 
     private val _isNetworkAvailable = MutableLiveData<Boolean>()
@@ -30,10 +30,12 @@ class NewsViewModel(
     private val _listOfTopArticles = MutableLiveData<List<Article>>()
     private val _listOfSearchedArticles = MutableLiveData<List<Article>>()
     private val _listOfPagedSearchedArticles = MutableLiveData<PagingData<Article>>()
+    private val _listOfTopHeadlineArticles = MutableLiveData<PagingData<Article>>()
 
     private val _article = MutableLiveData<Article>()
     private var _categoryFilter = MutableLiveData<String>()
 
+    val listOfTopHeadlineArticles = _listOfTopHeadlineArticles
     val listOfTopArticles: LiveData<List<Article>> = _listOfTopArticles
     val listOfSearchedArticles: LiveData<List<Article>> = _listOfSearchedArticles
     val listOfPagedSearchedArticles: LiveData<PagingData<Article>> = _listOfPagedSearchedArticles
@@ -53,7 +55,7 @@ class NewsViewModel(
 
     fun getNewsFromApiAndInsertIntoDb(
         category: String,
-        language: String
+        language: String,
     ) {
         viewModelScope.launch {
             if (hasInternetConnection()) {
@@ -82,7 +84,7 @@ class NewsViewModel(
 
     fun getTopHeadlinesFromAPI(
         category: String,
-        language: String
+        language: String,
     ) {
         viewModelScope.launch {
             _status.value = Resource.Loading()
@@ -124,6 +126,36 @@ class NewsViewModel(
             } catch (e: Exception) {
                 _status.value = Resource.Error(e.localizedMessage)
                 _listOfSearchedArticles.value = listOf()
+            }
+        }
+    }
+
+    fun getGeneralTopHeadlinesFromDB(category: String, language: String) {
+        viewModelScope.launch {
+            val generalNewsList =
+                newsRepository.getGeneralTopHeadlinesFromDB(category, language)
+                    .cachedIn(viewModelScope)
+            generalNewsList.collectLatest { pagingData ->
+                _listOfTopHeadlineArticles.value = pagingData
+            }
+        }
+    }
+
+    fun getOtherTopHeadlinesFromApi(
+        category: String,
+        language: String,
+    ) {
+        viewModelScope.launch {
+            if (hasInternetConnection()) {
+                _isNetworkAvailable.value = hasInternetConnection()
+                val otherCategorisedNewsList =
+                    newsRepository.getOtherTopHeadlinesFromApi(category, language)
+                        .cachedIn(viewModelScope)
+                otherCategorisedNewsList.collectLatest { pagingData ->
+                    _listOfTopHeadlineArticles.value = pagingData
+                }
+            } else {
+                _isNetworkAvailable.value = false
             }
         }
     }
@@ -174,13 +206,10 @@ class NewsViewModel(
         when (selectedCategory) {
             "General" -> {
                 _isNetworkAvailable.value = true
-                if (hasInternetConnection()) {
-                    getNewsFromApiAndInsertIntoDb(selectedCategory, "en")
-                }
-                getTopHeadlinesFromDb()
+                getGeneralTopHeadlinesFromDB(selectedCategory, "en")
             }
             else -> {
-                getTopHeadlinesFromAPI(selectedCategory, "en")
+                getOtherTopHeadlinesFromApi(selectedCategory, "en")
             }
         }
     }
