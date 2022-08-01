@@ -224,6 +224,32 @@
             app:layout_constraintTop_toBottomOf="@id/chips_horizontal_scroll"
             bind:passedViewModel="@{viewModel}" />
 
+        <TextView
+            android:id="@+id/emptyList"
+            style="@style/Widget.NewsApp.BodyBoldText"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:text="@string/empty_List"
+            android:visibility="gone"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/chips_horizontal_scroll" />
+
+        <Button
+            android:id="@+id/btnInitialRetry"
+            style="@style/Widget.NewsApp.Button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="6dp"
+            android:text="@string/text_retry"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/chips_horizontal_scroll" />
+
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
