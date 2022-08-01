@@ -1,9 +1,7 @@
 package com.example.msnews.data.repository
 
 import androidx.paging.PagingData
-import com.example.msnews.data.model.ApiResponse
 import com.example.msnews.data.model.Article
-import com.example.msnews.data.model.Resource
 import kotlinx.coroutines.flow.Flow
 
 /**
@@ -15,16 +13,9 @@ import kotlinx.coroutines.flow.Flow
 interface NewsRepository {
 
     // get from Api
-    suspend fun getTopHeadlinesFromApi(category: String, language: String): Resource<ApiResponse>
-    suspend fun getSearchedNews(searchQuery: String, language: String): Resource<ApiResponse>
     suspend fun getPagedSearchedNews(searchQuery: String, language: String): Flow<PagingData<Article>>
     fun getOtherTopHeadlinesFromApi(category: String, language: String): Flow<PagingData<Article>>
 
     // Local storage functions
-    suspend fun insertNewsToDb(articles: List<Article>)
-    fun getNewsFromDb(): Flow<List<Article>>
-
     fun getGeneralTopHeadlinesFromDB(category: String, language: String): Flow<PagingData<Article>>
-
-    suspend fun getNewsFromApiAndInsertIntoDb(category: String, language: String)
 }

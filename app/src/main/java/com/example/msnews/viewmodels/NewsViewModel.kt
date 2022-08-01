@@ -12,7 +12,6 @@ import com.example.msnews.NewsApplication
 import com.example.msnews.data.model.Article
 import com.example.msnews.data.model.Resource
 import com.example.msnews.data.repository.NewsRepository
-import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 
@@ -27,8 +26,6 @@ class NewsViewModel(
 
     private val _isNetworkAvailable = MutableLiveData<Boolean>()
     private val _status = MutableLiveData<Resource<List<Article>>>()
-    private val _listOfTopArticles = MutableLiveData<List<Article>>()
-    private val _listOfSearchedArticles = MutableLiveData<List<Article>>()
     private val _listOfPagedSearchedArticles = MutableLiveData<PagingData<Article>>()
     private val _listOfTopHeadlineArticles = MutableLiveData<PagingData<Article>>()
 
@@ -36,8 +33,6 @@ class NewsViewModel(
     private var _categoryFilter = MutableLiveData<String>()
 
     val listOfTopHeadlineArticles = _listOfTopHeadlineArticles
-    val listOfTopArticles: LiveData<List<Article>> = _listOfTopArticles
-    val listOfSearchedArticles: LiveData<List<Article>> = _listOfSearchedArticles
     val listOfPagedSearchedArticles: LiveData<PagingData<Article>> = _listOfPagedSearchedArticles
     val article: LiveData<Article> = _article
     val status: LiveData<Resource<List<Article>>> = _status
@@ -53,84 +48,7 @@ class NewsViewModel(
         _isNetworkAvailable.value = true
     }
 
-    fun getNewsFromApiAndInsertIntoDb(
-        category: String,
-        language: String,
-    ) {
-        viewModelScope.launch {
-            if (hasInternetConnection()) {
-                newsRepository.getNewsFromApiAndInsertIntoDb(category, language)
-                Log.d("Data inserted", " Successful")
-            }
-        }
-    }
-
-    fun getTopHeadlinesFromDb() {
-        viewModelScope.launch {
-            _status.value = Resource.Loading()
-            try {
-                val apiResponse = newsRepository.getNewsFromDb()
-                apiResponse.collect { listOfArticles ->
-                    Log.d("Data fetched", listOfArticles.size.toString())
-                    _listOfTopArticles.value = listOfArticles
-                    _status.value = Resource.Success(listOfArticles)
-                }
-            } catch (e: Exception) {
-                _status.value = Resource.Error(e.localizedMessage)
-                _listOfTopArticles.value = listOf()
-            }
-        }
-    }
-
-    fun getTopHeadlinesFromAPI(
-        category: String,
-        language: String,
-    ) {
-        viewModelScope.launch {
-            _status.value = Resource.Loading()
-            try {
-                if (hasInternetConnection()) {
-                    _isNetworkAvailable.value = hasInternetConnection()
-                    val apiResponse =
-                        newsRepository.getTopHeadlinesFromApi(category, language).data!!
-                    Log.d("Data fetched for $category", apiResponse.articles.size.toString())
-                    _listOfTopArticles.value = apiResponse.articles
-                    _status.value = Resource.Success(apiResponse.articles!!)
-                } else {
-                    _isNetworkAvailable.value = hasInternetConnection()
-                    _status.value = Resource.Error("No internet")
-                    _listOfTopArticles.value = listOf()
-                }
-            } catch (e: Exception) {
-                _status.value = Resource.Error(e.localizedMessage)
-                _listOfTopArticles.value = listOf()
-            }
-        }
-    }
-
-    fun getSearchedNews(searchQuery: String, language: String) {
-        viewModelScope.launch {
-            _status.value = Resource.Loading()
-            try {
-                if (hasInternetConnection()) {
-                    _isNetworkAvailable.value = hasInternetConnection()
-                    val apiResponse = newsRepository.getSearchedNews(searchQuery, language).data!!
-                    Log.d("Data fetched for $searchQuery", apiResponse.articles.size.toString())
-                    _listOfSearchedArticles.value = apiResponse.articles
-                    _status.value = Resource.Success(apiResponse.articles)
-                } else {
-                    _isNetworkAvailable.value = false
-                    _status.value = Resource.Error("No internet")
-                    _listOfSearchedArticles.value = listOf()
-                }
-            } catch (e: Exception) {
-                _status.value = Resource.Error(e.localizedMessage)
-                _listOfSearchedArticles.value = listOf()
-            }
-        }
-    }
-
-    fun getGeneralTopHeadlinesFromDB(category: String, language: String) {
+    private fun getGeneralTopHeadlinesFromDB(category: String, language: String) {
         viewModelScope.launch {
             val generalNewsList =
                 newsRepository.getGeneralTopHeadlinesFromDB(category, language)
@@ -141,7 +59,7 @@ class NewsViewModel(
         }
     }
 
-    fun getOtherTopHeadlinesFromApi(
+    private fun getOtherTopHeadlinesFromApi(
         category: String,
         language: String,
     ) {
@@ -162,33 +80,19 @@ class NewsViewModel(
 
     fun getPagedSearchedNews(searchQuery: String, language: String) {
         viewModelScope.launch {
-            _status.value = Resource.Loading()
-            try {
-                if (hasInternetConnection()) {
-                    _isNetworkAvailable.value = hasInternetConnection()
-                    val apiResponse = newsRepository.getPagedSearchedNews(searchQuery, language)
-                        // to maintain paging state through configuration or navigation changes,
-                        // we use the cachedIn()
-                        .cachedIn(viewModelScope)
-                    Log.d("Loading ", status.value.toString())
-                    /*  Log.d("Paged Data fetched for $searchQuery", apiResponse.value.toString())
-                      _listOfPagedSearchedArticles.value = apiResponse.value
-                      _status.value = Resource.Success(listOf())
-                      */
-                    apiResponse.collectLatest { pagedArticles ->
-                        Log.d("Paged Data fetched for $searchQuery", pagedArticles.toString())
-                        _listOfPagedSearchedArticles.value = pagedArticles
-                        _status.value = Resource.Success(listOf())
-                        Log.d("Loading ", status.value.toString())
-                    }
-                } else {
-                    _isNetworkAvailable.value = false
-                    _status.value = Resource.Error("No internet")
-                    _listOfSearchedArticles.value = listOf()
+            if (hasInternetConnection()) {
+                _isNetworkAvailable.value = hasInternetConnection()
+                val apiResponse = newsRepository.getPagedSearchedNews(searchQuery, language)
+                    // to maintain paging state through configuration or navigation changes,
+                    // we use the cachedIn()
+                    .cachedIn(viewModelScope)
+
+                apiResponse.collectLatest { pagedArticles ->
+                    Log.d("Paged Data fetched for $searchQuery", pagedArticles.toString())
+                    _listOfPagedSearchedArticles.value = pagedArticles
                 }
-            } catch (e: Exception) {
-                _status.value = Resource.Error(e.localizedMessage)
-                _listOfSearchedArticles.value = listOf()
+            } else {
+                _isNetworkAvailable.value = false
             }
         }
     }

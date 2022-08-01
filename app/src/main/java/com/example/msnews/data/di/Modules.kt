@@ -69,7 +69,7 @@ val apiModule = module {
 }
 
 val repositoryModule = module {
-    single<NewsRepository> { NewsRepositoryImpl(get(), get(), get()) }
+    single<NewsRepository> { NewsRepositoryImpl(get(), get()) }
 }
 
 val presentationModule = module {
