@@ -14,6 +14,7 @@ import androidx.navigation.fragment.findNavController
 import com.example.msnews.R
 import com.example.msnews.databinding.FragmentTopHeadlineNewsBinding
 import com.example.msnews.ui.adapter.ArticleListener
+import com.example.msnews.ui.adapter.ArticleLoadStateAdapter
 import com.example.msnews.ui.adapter.PagingArticlesAdapter
 import com.example.msnews.ui.adapter.bindRecyclerView
 import com.example.msnews.viewmodels.NewsViewModel
@@ -69,6 +70,11 @@ class TopHeadlineNewsFragment : Fragment() {
             )
             // binding the recyclerview to the adapter
             binding.newsRecyclerView.adapter = articlesAdapter
+
+            binding.newsRecyclerView.adapter = articlesAdapter.withLoadStateHeaderAndFooter(
+                header = ArticleLoadStateAdapter { articlesAdapter.retry() },
+                footer = ArticleLoadStateAdapter { articlesAdapter.retry() },
+            )
 
             lifecycleScope.launch {
                 articlesAdapter.submitData(lifecycle, pagingListData)
