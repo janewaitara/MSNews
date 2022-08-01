@@ -47,7 +47,7 @@ object Versions {
     const val room = "2.4.2"
 
     //paging
-    const val  pagingVersion = "3.0.0-alpha12"
+    const val  pagingVersion = "3.1.0"
 
 }
 

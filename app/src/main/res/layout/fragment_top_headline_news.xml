@@ -171,7 +171,6 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/chips_horizontal_scroll"
-            app:listData="@{viewModel.listOfTopArticles}"
             tools:listitem="@layout/news_view_item" />
 
         <com.facebook.shimmer.ShimmerFrameLayout
@@ -182,8 +181,7 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/chips_horizontal_scroll"
-            app:newsStatus="@{viewModel.status}">
+            app:layout_constraintTop_toBottomOf="@id/chips_horizontal_scroll">
 
             <LinearLayout
                 android:layout_width="match_parent"
