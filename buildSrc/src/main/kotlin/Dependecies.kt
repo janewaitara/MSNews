@@ -47,7 +47,7 @@ object Versions {
     const val room = "2.4.2"
 
     //paging
-    const val  pagingVersion = "3.0.0-alpha12"
+    const val  pagingVersion = "3.1.0"
 
 }
 
@@ -103,6 +103,7 @@ object Libraries {
     const val roomRuntime = "androidx.room:room-runtime:${Versions.room}"
     const val roomCompiler =  "androidx.room:room-compiler:${Versions.room}"
     const val roomKtx =  "androidx.room:room-ktx:${Versions.room}"
+    const val roomPaging =  "androidx.room:room-paging:${Versions.room}"
 
     //Paging
     const val pagingRuntime = "androidx.paging:paging-runtime:${Versions.pagingVersion}"

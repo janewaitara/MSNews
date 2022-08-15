@@ -11,6 +11,8 @@ interface NewsApiService {
         @Query("category") category: String,
         @Query("language") language: String,
         @Query("apiKey") apiKey: String,
+        @Query("pageSize") pageSize: Int = 20,
+        @Query("page") page: Int
     ): Response<ApiResponse>
 
     @GET("v2/everything")
@@ -18,6 +20,7 @@ interface NewsApiService {
         @Query("q") searchQuery: String,
         @Query("language") language: String,
         @Query("apiKey") apiKey: String,
+        @Query("pageSize") pageSize: Int,
         @Query("page") page: Int
     ): Response<ApiResponse>
 }

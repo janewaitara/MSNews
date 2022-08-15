@@ -5,9 +5,10 @@ import androidx.room.RoomDatabase
 import androidx.room.TypeConverters
 import com.example.msnews.data.model.Article
 
-@Database(entities = [Article::class], version = 1, exportSchema = false)
+@Database(entities = [Article::class, ArticlesKeys::class], version = 1, exportSchema = false)
 @TypeConverters(SourceConverter::class)
 abstract class ArticlesDatabase : RoomDatabase() {
 
     abstract fun articlesDao(): ArticlesDao
+    abstract fun articlesKeysDao(): ArticlesKeysDao
 }

@@ -42,8 +42,11 @@ class SearchNewsPagingSource(
 
         return try {
             val apiResult = newsApi.getSearchedNews(
-                searchQuery = searchQuery, language = language,
-                apiKey = BuildConfig.API_KEY, page
+                searchQuery = searchQuery,
+                language = language,
+                apiKey = BuildConfig.API_KEY,
+                pageSize = NETWORK_SEARCH_PAGE_SIZE,
+                page = page
             )
 
             /**
@@ -52,12 +55,17 @@ class SearchNewsPagingSource(
              * if we didn't have our own Resource
              * */
             val apiResultAsResource = turnApiResultToResource(apiResult)
-            val searchedArticleListing = apiResultAsResource.data!!.articles
+
+            // Added the empty list to stop the crashing when the api requests have been exceeded
+            val searchedArticleListing = apiResultAsResource.data?.articles ?: listOf()
 
             val nextKey = if (searchedArticleListing.isEmpty()) {
                 null
             } else {
-                page + (params.loadSize / NETWORK_SEARCH_PAGE_SIZE)
+                // initial load size = 3 * NETWORK_SEARCH_PAGE_SIZE
+                // ensure we're not requesting duplicating items, at the 2nd request
+                // page + (params.loadSize / NETWORK_SEARCH_PAGE_SIZE)
+                page + 1
             }
 
             LoadResult.Page(

@@ -20,14 +20,15 @@
         android:paddingTop="@dimen/spacing_16dp"
         android:paddingBottom="@dimen/spacing_16dp">
 
-        <ImageView
+        <com.google.android.material.imageview.ShapeableImageView
             android:id="@+id/article_image"
             android:layout_width="64dp"
             android:layout_height="0dp"
             android:layout_marginEnd="@dimen/spacing_8dp"
             android:contentDescription="@string/news_illustration_content"
-            android:scaleType="fitXY"
+            android:scaleType="centerCrop"
             app:imageUrl="@{article.urlToImage}"
+            app:shapeAppearanceOverlay="@style/cornerRadiusImageView"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="@id/article_title"
             app:layout_constraintStart_toStartOf="parent"
@@ -39,9 +40,9 @@
             style="@style/Widget.NewsApp.BodyBoldText"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:text="@{article.title}"
+            android:ellipsize="end"
             android:maxLines="2"
-            android:ellipsize = "end"
+            android:text="@{article.title}"
             android:textColor="@color/DarkTextColor"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@id/article_image"
@@ -67,6 +68,8 @@
             style="@style/Widget.NewsApp.BodySmallText"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:ellipsize="end"
+            android:maxLines="1"
             android:text="@{article.source.name}"
             android:textColor="@color/subtleTextColor"
             app:layout_constraintEnd_toEndOf="parent"

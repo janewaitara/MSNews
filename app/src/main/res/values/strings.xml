@@ -16,4 +16,7 @@
     <string name="no_internet_heading">Oops!!</string>
     <string name="no_internet_description">There is a connection error. Please check your internet.</string>
     <string name="search_news">Search News</string>
+    <string name="text_retry">Try again</string>
+    <string name="paging_error">Error while paging</string>
+    <string name="empty_List"> 😓 No results found </string>
 </resources>

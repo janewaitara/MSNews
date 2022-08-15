@@ -57,4 +57,17 @@
         <item name="android:textColor">@color/chip_text_color_state</item>
         <item name="chipStrokeColor">@color/light_blue</item>
     </style>
+
+    <!--  Button Chip Text - label style -->
+    <style name="Widget.NewsApp.Button" parent="Widget.Material3.Button">
+        <item name="android:textAppearance">@style/Widget.NewsApp.BodyBoldText</item>
+        <item name="android:textColor">@color/lightest_blue</item>
+        <item name="rippleColor">@color/dark_blue</item>
+    </style>
+
+    <!-- cornerRadiusImageView -->
+    <style name="cornerRadiusImageView" parent="">
+        <item name="cornerFamily">rounded</item>
+        <item name="cornerSize">@dimen/radius_4dp</item>
+    </style>
 </resources>
