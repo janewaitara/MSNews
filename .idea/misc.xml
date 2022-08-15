@@ -16,7 +16,7 @@
         <entry key="app/src/main/res/layout/item_loading.xml" value="0.1" />
         <entry key="app/src/main/res/layout/item_loading_state.xml" value="0.1" />
         <entry key="app/src/main/res/layout/loading_shimmer_effect.xml" value="0.291213768115942" />
-        <entry key="app/src/main/res/layout/news_view_item.xml" value="0.2981651376146789" />
+        <entry key="app/src/main/res/layout/news_view_item.xml" value="0.45" />
         <entry key="app/src/main/res/layout/no_internet_connection.xml" value="0.14285714285714285" />
       </map>
     </option>

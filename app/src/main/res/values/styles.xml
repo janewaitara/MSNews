@@ -64,4 +64,10 @@
         <item name="android:textColor">@color/lightest_blue</item>
         <item name="rippleColor">@color/dark_blue</item>
     </style>
+
+    <!-- cornerRadiusImageView -->
+    <style name="cornerRadiusImageView" parent="">
+        <item name="cornerFamily">rounded</item>
+        <item name="cornerSize">@dimen/radius_4dp</item>
+    </style>
 </resources>

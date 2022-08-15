@@ -6,4 +6,5 @@
     <dimen name="spacing_64dp">64dp</dimen>
     <dimen name="spacing_32dp">32dp</dimen>
     <dimen name="spacing_16dp">16dp</dimen>
+    <dimen name="radius_4dp">4dp</dimen>
 </resources>
