@@ -1,6 +1,7 @@
 package com.example.msnews.ui.adapter
 
 import android.view.View
+import android.webkit.WebView
 import android.widget.ImageView
 import android.widget.RelativeLayout
 import android.widget.TextView
@@ -50,7 +51,12 @@ fun bindRecyclerView(recyclerView: RecyclerView, data: List<Article>?) {
 }*/
 
 @BindingAdapter(value = ["pagingListData", "scope", "lifecycle"], requireAll = true)
-fun bindRecyclerView(recyclerView: RecyclerView, pagingListData: PagingData<Article>?, scope: CoroutineScope, lifecycle: Lifecycle) {
+fun bindRecyclerView(
+    recyclerView: RecyclerView,
+    pagingListData: PagingData<Article>?,
+    scope: CoroutineScope,
+    lifecycle: Lifecycle,
+) {
     val adapter = recyclerView.adapter as PagingArticlesAdapter
     scope.launch {
         // Since the paging list is LiveData, we use the non-suspend submitData
@@ -95,4 +101,9 @@ fun formatPublishedAtToDateAndTime(textView: TextView, time: String) {
     // textView.text = ExtensionFunctions.toFormattedDateAndTime(time)
 
     textView.text = time.toFormattedDateAndTime(time)
+}
+
+@BindingAdapter("articleUrl")
+fun bindUrl(webView: WebView, url: String) {
+    webView.loadUrl(url)
 }

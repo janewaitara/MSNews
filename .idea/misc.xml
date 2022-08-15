@@ -3,6 +3,8 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="app/src/main/res/drawable-v24/details_bg.xml" value="0.1" />
+        <entry key="app/src/main/res/drawable/details_bg.xml" value="0.1" />
         <entry key="app/src/main/res/drawable/ic_broken_image.xml" value="0.1385" />
         <entry key="app/src/main/res/drawable/ic_no_connection.xml" value="0.1" />
         <entry key="app/src/main/res/drawable/ic_search_24.xml" value="0.1385" />
@@ -10,7 +12,7 @@
         <entry key="app/src/main/res/drawable/search_bg.xml" value="0.1385" />
         <entry key="app/src/main/res/drawable/search_field_bg.xml" value="0.1" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.2947916666666667" />
-        <entry key="app/src/main/res/layout/fragment_news_details.xml" value="0.1" />
+        <entry key="app/src/main/res/layout/fragment_news_details.xml" value="0.25" />
         <entry key="app/src/main/res/layout/fragment_search_news.xml" value="0.1" />
         <entry key="app/src/main/res/layout/fragment_top_headline_news.xml" value="0.1" />
         <entry key="app/src/main/res/layout/fragment_top_headlines.xml" value="0.28072916666666664" />
