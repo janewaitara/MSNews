@@ -15,6 +15,7 @@
         android:layout_height="match_parent"
         android:gravity="center"
         android:padding="@dimen/spacing_16dp"
+        android:background="@color/white"
         app:networkStatus="@{passedViewModel.isNetworkAvailable}">
 
         <ImageView

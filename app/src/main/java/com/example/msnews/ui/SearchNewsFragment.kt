@@ -54,8 +54,6 @@ class SearchNewsFragment : Fragment() {
         binding.coroutineScope = viewLifecycleOwner.lifecycleScope
         binding.lifecycle = lifecycle
 
-        observePagingData()
-
         binding.searchInputField.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
             override fun onQueryTextSubmit(query: String?): Boolean {
                 query?.let {
@@ -169,6 +167,7 @@ class SearchNewsFragment : Fragment() {
         /*sharedViewModel.listOfPagedSearchedArticles.observe(viewLifecycleOwner, Observer {
             setUpRecyclerView(it)
         })*/
+        observePagingData()
 
         Toast.makeText(context, "Searched", Toast.LENGTH_LONG).show()
     }
