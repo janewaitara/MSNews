@@ -12,6 +12,7 @@ import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.lifecycleScope
+import androidx.navigation.fragment.findNavController
 import androidx.paging.LoadState
 import androidx.paging.PagingData
 import com.example.msnews.R
@@ -185,6 +186,8 @@ class SearchNewsFragment : Fragment() {
         articlesAdapter = PagingArticlesAdapter(
             ArticleListener { article ->
                 sharedViewModel.onArticleClicked(article)
+                findNavController()
+                    .navigate(R.id.action_searchNewsFragment_to_newsDetailsFragment)
             }
         )
         binding.newsRecyclerView.adapter = articlesAdapter

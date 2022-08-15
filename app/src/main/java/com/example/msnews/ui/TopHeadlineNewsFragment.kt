@@ -71,6 +71,8 @@ class TopHeadlineNewsFragment : Fragment() {
             articlesAdapter = PagingArticlesAdapter(
                 ArticleListener { article ->
                     sharedViewModel.onArticleClicked(article)
+                    findNavController()
+                        .navigate(R.id.action_topHeadlineNewsFragment_to_newsDetailsFragment)
                     Log.e("News List", "Article clicked")
                 }
             )
