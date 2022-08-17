@@ -19,4 +19,5 @@
     <string name="text_retry">Try again</string>
     <string name="paging_error">Error while paging</string>
     <string name="empty_List"> 😓 No results found </string>
+    <string name="back_button">Back button</string>
 </resources>

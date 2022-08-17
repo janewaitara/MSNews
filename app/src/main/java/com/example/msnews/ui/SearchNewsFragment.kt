@@ -83,6 +83,11 @@ class SearchNewsFragment : Fragment() {
         binding.shimmerFrameLayout.isVisible = false
         binding.emptyList.isVisible = false
 
+        // Back button
+        binding.backButton.setOnClickListener {
+            findNavController().popBackStack()
+        }
+
         // Inflate the layout for this fragment
         return binding.root
     }

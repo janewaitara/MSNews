@@ -17,6 +17,7 @@
         tools:context=".ui.NewsDetailsFragment">
 
         <ImageView
+            android:id="@+id/article_image"
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:scaleType="centerCrop"
@@ -28,6 +29,17 @@
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintVertical_bias="0"
             tools:src="@tools:sample/backgrounds/scenic" />
+
+        <ImageButton
+            android:id="@+id/back_button"
+            android:layout_width="@dimen/spacing_48dp"
+            android:layout_height="@dimen/spacing_48dp"
+            android:layout_marginStart="@dimen/spacing_16dp"
+            android:layout_marginTop="@dimen/spacing_16dp"
+            android:src="@drawable/ic_white_backspace"
+            android:background="@drawable/back_bt_bg"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
