@@ -30,6 +30,12 @@ You'll need to provide API key to fetch the news from the News API Service. Curr
 - Build the app
 - Enjoyyyyy 🎉
 
+# Architecture
+The app uses MVVM (Model View View Model) architecture to have a unidirectional flow of data, separation of concern, testability, and a lot more.
+
+![Mvvm arch](https://user-images.githubusercontent.com/32500878/185210975-8f863f9d-ae67-4df9-bdce-54e8e7e4fd5c.png)
+
+
 # Tech Stack
 
 - Tech Stack
@@ -47,9 +53,6 @@ You'll need to provide API key to fetch the news from the News API Service. Curr
   - [OkHttp interceptor](https://github.com/square/okhttp/tree/master/okhttp-logging-interceptor) - Logs HTTP requests and responses
   - [Flow](https://kotlinlang.org/docs/reference/coroutines/flow.html) - handle the stream of data asynchronously that executes sequentially.
   - [KOIN](https://insert-koin.io/) - a pragmatic lightweight dependency injection framework.
-
-- Architecture
-  * MVVM - Model View View Model
 
 - Gradle
   * [Gradle Kotlin DSL](https://docs.gradle.org/current/userguide/kotlin_dsl.html) - For reference purposes, here's an [article](https://evanschepsiror.medium.com/migrating-to-kotlin-dsl-4ee0d6d5c977) explaining the migration.
