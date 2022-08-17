@@ -4,13 +4,13 @@ News App is a simple news app that fetches top headline news from [NewsAPI](http
 
 <p align="left">
  <img src="screenshots/categoriesScreen.png" width=30% height=30%>
-<img src="screenshots/noInternet.png" width=30% height=30%>
-<img src="screenshots/searchScreen.png" width=30% height=30%>
+ <img src="screenshots/loadingScreen.png" width=30% height=30%>
+ <img src="screenshots/noInternet.png" width=30% height=30%>
 </p>
 
 <p align="left">
   <img src="screenshots/detailsScreen.png" width=30% height=30%>
-<img src="screenshots/loadingScreen.png" width=30% height=30%>
+  <img src="screenshots/searchScreen.png" width=30% height=30%>
 </p>
 
 # Development Environment
