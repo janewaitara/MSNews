@@ -11,7 +11,7 @@
         android:layout_width="64dp"
         android:layout_height="64dp"
         android:layout_marginEnd="@dimen/spacing_8dp"
-        android:background="@color/colorGrey"
+        android:background="@drawable/loading_bg"
         android:contentDescription="@string/news_illustration_content"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@id/article_title"
@@ -22,10 +22,11 @@
         android:id="@+id/article_title"
         android:layout_width="0dp"
         android:layout_height="@dimen/spacing_24dp"
-        android:background="@color/colorGrey"
+        android:background="@drawable/loading_bg"
+        app:layout_constraintBottom_toTopOf="@+id/article_published_at"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@id/article_image"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="@id/article_image" />
 
     <TextView
         android:id="@+id/article_published_at"
@@ -33,7 +34,8 @@
         android:layout_height="@dimen/spacing_16dp"
         android:layout_marginTop="@dimen/spacing_16dp"
         android:layout_marginEnd="@dimen/spacing_24dp"
-        android:background="@color/colorGrey"
+        android:background="@drawable/loading_bg"
+        app:layout_constraintBottom_toBottomOf="@+id/article_image"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="@id/article_title"
         app:layout_constraintTop_toBottomOf="@+id/article_title" />
