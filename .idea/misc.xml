@@ -3,6 +3,7 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="app/src/main/res/drawable-v21/news_bg.xml" value="0.1" />
         <entry key="app/src/main/res/drawable-v24/back_bt_bg.xml" value="0.1605" />
         <entry key="app/src/main/res/drawable-v24/details_bg.xml" value="0.1" />
         <entry key="app/src/main/res/drawable/back_bt_bg.xml" value="0.1605" />
