@@ -1,7 +1,11 @@
+import java.io.FileInputStream
+import java.util.Properties
+
 plugins {
     id(BuildPlugins.androidApplication)
     id(BuildPlugins.kotlinAndroid)
     id(BuildPlugins.ktlintPlugin)
+    id("kotlin-kapt")
 }
 
 android {
@@ -15,6 +19,8 @@ android {
         versionName = AndroidSdk.versionName
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
+
+        buildConfigField("String", "API_KEY", getBearerTokenFromFile())
     }
 
     buildTypes {
@@ -22,6 +28,9 @@ android {
             isMinifyEnabled = false
             proguardFiles(getDefaultProguardFile("proguard-android-optimize.txt"), "proguard-rules.pro")
         }
+    }
+    buildFeatures {
+        dataBinding = true
     }
 
     compileOptions {
@@ -61,6 +70,25 @@ dependencies {
     implementation(Libraries.coroutines)
     implementation(Libraries.coroutinesAndroid)
 
+    // Navigation
+    implementation(Libraries.navigationUI)
+    implementation(Libraries.navigationFragment)
+
+    // Coil
+    implementation(Libraries.coil)
+
+    // Shimmer Effect
+    implementation(Libraries.shimmerEffect)
+
+    // Room
+    implementation(Libraries.roomRuntime)
+    kapt(Libraries.roomCompiler)
+    implementation(Libraries.roomKtx)
+    implementation(Libraries.roomPaging)
+
+    // Paging
+    implementation(Libraries.pagingRuntime)
+
     // Unit Tests
     testImplementation(TestLibraries.junit4)
     testImplementation(TestLibraries.koinTest)
@@ -72,4 +100,13 @@ dependencies {
 
     // Instrumentation Tests
     androidTestImplementation(TestLibraries.koinTest)
+}
+
+fun getBearerTokenFromFile(): String {
+    val secretsFile = rootProject.file("secrets.properties")
+    val secrets = Properties()
+    if (secretsFile.exists()) {
+        secrets.load(FileInputStream(secretsFile))
+    }
+    return secrets.getProperty("API_KEY", "")
 }

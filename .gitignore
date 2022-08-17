@@ -9,3 +9,5 @@
 .cxx
 local.properties
 secrets.properties
+buildSrc/build/*
+buildSrc/.gradle/*

@@ -8,7 +8,7 @@ object Versions {
     const val appCompat = "1.4.1"
     const val constraintLayout = "2.1.4"
     const val ktx = "1.7.0"
-    const val material = "1.6.0-alpha02"
+    const val material = "1.6.1"
 
     //Version codes for all the test libraries
     const val junit4 = "4.13.2"
@@ -33,6 +33,21 @@ object Versions {
 
     // Coroutines
     const val coroutines = "1.3.9"
+
+    // Navigation
+    const val navigation = "2.4.2"
+
+    //Coil
+    const val coil = "1.1.1"
+
+    //Shimmer
+    const val shimmerEffect = "0.5.0"
+
+    //Room
+    const val room = "2.4.2"
+
+    //paging
+    const val  pagingVersion = "3.1.0"
 
 }
 
@@ -73,6 +88,25 @@ object Libraries {
     const val coroutines = "org.jetbrains.kotlinx:kotlinx-coroutines-core:${Versions.coroutines}"
     const val coroutinesAndroid =
         "org.jetbrains.kotlinx:kotlinx-coroutines-android:${Versions.coroutines}"
+
+    // Navigation
+    const val navigationUI = "androidx.navigation:navigation-ui-ktx:${Versions.navigation}"
+    const val navigationFragment = "androidx.navigation:navigation-fragment-ktx:${Versions.navigation}"
+
+    //Coil
+    const val coil = "io.coil-kt:coil:${Versions.coil}"
+
+    //Shimmer Effect
+    const val shimmerEffect = "com.facebook.shimmer:shimmer:${Versions.shimmerEffect}"
+
+    //Room
+    const val roomRuntime = "androidx.room:room-runtime:${Versions.room}"
+    const val roomCompiler =  "androidx.room:room-compiler:${Versions.room}"
+    const val roomKtx =  "androidx.room:room-ktx:${Versions.room}"
+    const val roomPaging =  "androidx.room:room-paging:${Versions.room}"
+
+    //Paging
+    const val pagingRuntime = "androidx.paging:paging-runtime:${Versions.pagingVersion}"
 
 
 }

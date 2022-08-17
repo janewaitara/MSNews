@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/topHeadlineNewsFragment">
+
+    <fragment
+        android:id="@+id/topHeadlineNewsFragment"
+        android:name="com.example.msnews.ui.TopHeadlineNewsFragment"
+        android:label="Top Headlines"
+        tools:layout="@layout/fragment_top_headline_news" >
+        <action
+            android:id="@+id/action_topHeadlineNewsFragment_to_searchNewsFragment"
+            app:destination="@id/searchNewsFragment" />
+        <action
+            android:id="@+id/action_topHeadlineNewsFragment_to_newsDetailsFragment"
+            app:destination="@id/newsDetailsFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/searchNewsFragment"
+        android:name="com.example.msnews.ui.SearchNewsFragment"
+        android:label="fragment_search_news"
+        tools:layout="@layout/fragment_search_news" >
+        <action
+            android:id="@+id/action_searchNewsFragment_to_newsDetailsFragment"
+            app:destination="@id/newsDetailsFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/newsDetailsFragment"
+        android:name="com.example.msnews.ui.NewsDetailsFragment"
+        android:label="NewsDetailsFragment" />
+</navigation>
