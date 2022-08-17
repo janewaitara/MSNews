@@ -14,6 +14,7 @@
         <entry key="app/src/main/res/drawable/ic_no_connection.xml" value="0.1" />
         <entry key="app/src/main/res/drawable/ic_search_24.xml" value="0.1385" />
         <entry key="app/src/main/res/drawable/loading_img.xml" value="0.1" />
+        <entry key="app/src/main/res/drawable/news_bg.xml" value="0.1" />
         <entry key="app/src/main/res/drawable/search_bg.xml" value="0.1385" />
         <entry key="app/src/main/res/drawable/search_field_bg.xml" value="0.1" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.2947916666666667" />
