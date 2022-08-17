@@ -51,7 +51,7 @@ The app uses MVVM (Model View View Model) architecture to have a unidirectional 
   - [Retrofit](https://square.github.io/retrofit/) - Type-safe HTTP client for Android and Java and Kotlin by Square, Inc.
   - [Moshi](https://square.github.io/moshi/1.x/moshi/index.html) - A modern JSON library for Android, Java and Kotlin
   - [OkHttp interceptor](https://github.com/square/okhttp/tree/master/okhttp-logging-interceptor) - Logs HTTP requests and responses
-  - [Flow](https://kotlinlang.org/docs/reference/coroutines/flow.html) - handle the stream of data asynchronously that executes sequentially.
+  - [Flow](https://kotlinlang.org/docs/reference/coroutines/flow.html) - An asynchronous version of a Sequence, a type of collection whose values are lazily produced. Flow handles the stream of data asynchronously that executes sequentially.
   - [KOIN](https://insert-koin.io/) - a pragmatic lightweight dependency injection framework.
 
 - Gradle
