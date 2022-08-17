@@ -17,8 +17,6 @@
         <variable
             name="lifecycle"
             type="androidx.lifecycle.Lifecycle" />
-
-
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -29,15 +27,27 @@
         android:layout_marginEnd="16dp"
         tools:context=".ui.SearchNewsFragment">
 
+        <ImageView
+            android:id="@+id/back_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:contentDescription="@string/back_button"
+            android:src="@drawable/ic_dark_backspace"
+            app:layout_constraintBottom_toBottomOf="@+id/search_news_heading"
+            app:layout_constraintEnd_toStartOf="@+id/search_news_heading"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/search_news_heading" />
+
         <TextView
             android:id="@+id/search_news_heading"
             style="@style/Widget.NewsApp.TitleText"
-            android:layout_width="match_parent"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/spacing_16dp"
             android:layout_marginTop="@dimen/spacing_16dp"
             android:text="@string/search_news"
             android:textColor="@color/dark_blue"
-            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/back_button"
             app:layout_constraintTop_toTopOf="parent" />
 
         <SearchView
@@ -74,9 +84,9 @@
             app:layout_constraintTop_toBottomOf="@id/search_input_field"
             tools:listitem="@layout/news_view_item" />
 
-       <!-- app:pagingListData="@{viewModel.listOfPagedSearchedArticles}"
-        app:scope="@{coroutineScope}"
-        app:lifecycle="@{lifecycle}"-->
+        <!-- app:pagingListData="@{viewModel.listOfPagedSearchedArticles}"
+         app:scope="@{coroutineScope}"
+         app:lifecycle="@{lifecycle}"-->
 
         <com.facebook.shimmer.ShimmerFrameLayout
             android:id="@+id/shimmer_frame_layout"
@@ -131,29 +141,29 @@
 
         <TextView
             android:id="@+id/emptyList"
+            style="@style/Widget.NewsApp.BodyBoldText"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:gravity="center"
             android:text="@string/empty_List"
-            style="@style/Widget.NewsApp.BodyBoldText"
             android:visibility="gone"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/search_input_field"/>
+            app:layout_constraintTop_toBottomOf="@id/search_input_field" />
 
         <Button
             android:id="@+id/btnInitialRetry"
+            style="@style/Widget.NewsApp.Button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:text="@string/text_retry"
-            style="@style/Widget.NewsApp.Button"
             android:layout_marginTop="6dp"
+            android:text="@string/text_retry"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/search_input_field"/>
+            app:layout_constraintTop_toBottomOf="@id/search_input_field" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

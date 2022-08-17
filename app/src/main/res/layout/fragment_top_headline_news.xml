@@ -18,9 +18,9 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginStart="16dp"
+
         android:layout_marginTop="16dp"
-        android:layout_marginEnd="16dp"
+
         tools:context=".ui.TopHeadlineNewsFragment">
 
         <TextView
@@ -29,6 +29,8 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/spacing_16dp"
+            android:paddingStart="@dimen/spacing_16dp"
+            android:paddingEnd="@dimen/spacing_16dp"
             android:text="@string/top_headlines_news"
             android:textColor="@color/dark_blue"
             app:layout_constraintEnd_toStartOf="@+id/search_news"
@@ -42,6 +44,8 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/spacing_16dp"
             android:text="@string/heading_desc"
+            android:paddingStart="@dimen/spacing_16dp"
+            android:paddingEnd="@dimen/spacing_16dp"
             android:textColor="@color/primaryTextColor"
             app:layout_constraintEnd_toStartOf="@+id/search_news"
             app:layout_constraintStart_toStartOf="parent"
@@ -54,6 +58,7 @@
             android:background="@drawable/search_icon_bg"
             android:clickable="true"
             android:focusable="true"
+            android:layout_marginEnd="@dimen/spacing_16dp"
             android:onClick="@{() -> topHeadlineNews.navigateToSearchScreen()}"
             app:layout_constraintBottom_toBottomOf="@id/text_heading_desc"
             app:layout_constraintEnd_toEndOf="parent"
@@ -75,6 +80,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/spacing_32dp"
             android:scrollbars="none"
+            android:layout_marginStart="@dimen/spacing_16dp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/text_heading_desc">
 

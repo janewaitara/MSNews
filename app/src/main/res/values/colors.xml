@@ -20,4 +20,7 @@
     <color name="primaryTextColor">#253046</color>
     <color name="subtleTextColor">#737A88</color>
 
+    <color name="overlayColor">#8003102C</color>
+    <color name="backgroundColor">#FCFDFF</color>
+
 </resources>
